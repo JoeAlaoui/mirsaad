@@ -1,0 +1,843 @@
+{
+  "metadata": {
+    "application": "MIRSAAD",
+    "version": "0.2",
+    "source": "Portefeuille_Services_IT_AMMPS_v0.1.xlsx",
+    "last_updated": "2026-09-15T10:03:14Z",
+    "total_services": 13
+  },
+  "services": [
+    {
+      "id": "APP-001",
+      "identification": {
+        "nom": "DocuTrace Lab",
+        "categorie": "Métier",
+        "proprietaire": "DSID",
+        "direction_beneficiaire": "LNCM",
+        "date_creation": "20/02/2026",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "On-prem",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {
+        "objectif": "Suivi des impressions et traçabilité des documents imprimés",
+        "probleme_resolu": "Suivi et traçabilité des documents imprimés",
+        "benefices": "Facilité et sûreté de la traçabilité",
+        "parties_prenantes": "DSID (Admin), LNCM (Évaluateurs, CS, CD, Tech PC + Bio)"
+      },
+      "description": {
+        "fonctionnelle": "Impression centralisée et gestion centralisée des documents",
+        "utilisateurs": "DSID (Administrateur), LNCM",
+        "processus_supportes": "Processus de Saisie des Résultats des Analyses",
+        "frequence_utilisation": "Quotidien"
+      },
+      "architecture": {
+        "stack_technologique": "Python, FastAPI, React",
+        "infrastructure": "Windows 11",
+        "donnees_traitees": "MySQL",
+        "integrations": "Sumatra, LibreOffice"
+      },
+      "securite": {
+        "donnees_sensibles": false,
+        "reglementation": "ISO 9001 / ISO 17025",
+        "classification": "Basse",
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": "99%",
+        "rto": "1 jour",
+        "rpo": "1 jour",
+        "support_horaire": "Jours de travail"
+      },
+      "risques": {
+        "risques_principaux": "N/A",
+        "impact_arret": "Lenteur de saisie des analyses",
+        "pca": "Oui",
+        "plan_mitigation": "Oui"
+      },
+      "cycle_vie": {
+        "conception": "fait",
+        "deploiement": "fait",
+        "exploitation": "en_cours",
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En projet",
+        "criticite": "Moyenne",
+        "completude_pct": 92
+      }
+    },
+    {
+      "id": "APP-002",
+      "identification": {
+        "nom": "VigiUp",
+        "categorie": "Métier",
+        "proprietaire": "DSID",
+        "direction_beneficiaire": "Vigilance",
+        "date_creation": "20/01/2026",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "On-prem",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {
+        "objectif": "Suivi des effets indésirables des produits de santé",
+        "probleme_resolu": "Faciliter le suivi des effets indésirables",
+        "benefices": "Rapidité et facilité de suivi",
+        "parties_prenantes": "Vigilance"
+      },
+      "description": {
+        "fonctionnelle": "Suivi des effets indésirables des produits de santé",
+        "utilisateurs": "Service Vigilance, Citoyens",
+        "processus_supportes": null,
+        "frequence_utilisation": "Quotidienne"
+      },
+      "architecture": {
+        "stack_technologique": "Spring Boot 3.x, Java 17, React 18, TypeScript, MySQL 8.0",
+        "infrastructure": null,
+        "donnees_traitees": "MySQL 8.0",
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": false,
+        "reglementation": null,
+        "classification": null,
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": 0.99,
+        "rto": "1 jour",
+        "rpo": "1 jour",
+        "support_horaire": "Jours ouvrables"
+      },
+      "risques": {
+        "risques_principaux": "Bugs",
+        "impact_arret": "Recueil manuel et physique",
+        "pca": null,
+        "plan_mitigation": null
+      },
+      "cycle_vie": {
+        "conception": null,
+        "deploiement": "fait",
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En projet",
+        "criticite": "Critique",
+        "completude_pct": 69
+      }
+    },
+    {
+      "id": "APP-004",
+      "identification": {
+        "nom": "Moussanada",
+        "categorie": "Support",
+        "proprietaire": "DSID",
+        "direction_beneficiaire": "AMMPS",
+        "date_creation": "03/2026",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "On-prem",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {
+        "objectif": "Helpdesk IT — gestion des tickets incidents et demandes",
+        "probleme_resolu": "Centraliser la gestion des incidents et demandes IT",
+        "benefices": "Traçabilité complète et réactivité du support IT",
+        "parties_prenantes": "DSID, AMMPS"
+      },
+      "description": {
+        "fonctionnelle": "Gestion et suivi des tickets via GLPI",
+        "utilisateurs": "DSID, Tous les utilisateurs AMMPS",
+        "processus_supportes": "Support IT",
+        "frequence_utilisation": "Quotidienne"
+      },
+      "architecture": {
+        "stack_technologique": "GLPi",
+        "infrastructure": null,
+        "donnees_traitees": null,
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": null,
+        "reglementation": null,
+        "classification": null,
+        "journalisation": null,
+        "sauvegarde": null
+      },
+      "performance_sla": {
+        "disponibilite_cible": null,
+        "rto": null,
+        "rpo": null,
+        "support_horaire": null
+      },
+      "risques": {
+        "risques_principaux": null,
+        "impact_arret": null,
+        "pca": null,
+        "plan_mitigation": null
+      },
+      "cycle_vie": {
+        "conception": null,
+        "deploiement": null,
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En production",
+        "criticite": "Moyenne",
+        "completude_pct": 44
+      }
+    },
+    {
+      "id": "APP-005",
+      "identification": {
+        "nom": "Sentinel",
+        "categorie": "Métier",
+        "proprietaire": "AMMPS",
+        "direction_beneficiaire": "Surveillance Post-Marketing",
+        "date_creation": "25/02/2026",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "On-prem",
+        "mode_developpement": "Interne",
+        "prestataire": "DSID"
+      },
+      "proposition_valeur": {
+        "objectif": "Signalement et gestion des problèmes liés aux médicaments sur le marché",
+        "probleme_resolu": "Traçabilité des réclamations, reporting, gestion des droits et accès",
+        "benefices": "Gain en productivité, sûreté de la base de données, facilité de gestion",
+        "parties_prenantes": "Surveillance Post-Marketing, Inspection, Directeur Général"
+      },
+      "description": {
+        "fonctionnelle": "Suivi des défauts de qualité des médicaments avant consommation",
+        "utilisateurs": "DSID (Admin), Chef de Service, Évaluateurs, Clients",
+        "processus_supportes": "Processus de Déclaration des défauts de qualité",
+        "frequence_utilisation": "Quotidienne"
+      },
+      "architecture": {
+        "stack_technologique": "React, SpringBoot, MySQL",
+        "infrastructure": "Windows 11",
+        "donnees_traitees": "MySQL",
+        "integrations": "À renseigner"
+      },
+      "securite": {
+        "donnees_sensibles": true,
+        "reglementation": "CNDP",
+        "classification": "Haute",
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": "99%",
+        "rto": "1 jour",
+        "rpo": "1 jour",
+        "support_horaire": "Jours de travail"
+      },
+      "risques": {
+        "risques_principaux": "N/A",
+        "impact_arret": "Lenteur de saisie des analyses",
+        "pca": "Oui",
+        "plan_mitigation": "Oui"
+      },
+      "cycle_vie": {
+        "conception": "fait",
+        "deploiement": "À faire",
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En projet",
+        "criticite": "Critique",
+        "completude_pct": 92
+      }
+    },
+    {
+      "id": "APP-006",
+      "identification": {
+        "nom": "E-Services",
+        "categorie": "Métier",
+        "proprietaire": null,
+        "direction_beneficiaire": "Dispositif Médical",
+        "date_creation": "Legacy",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "Cloud",
+        "mode_developpement": "Prestataire",
+        "prestataire": "Digital Performance"
+      },
+      "proposition_valeur": {
+        "objectif": "Gestion des demandes d'import, autorisation de fabrication locale, et négativité",
+        "probleme_resolu": "Traçabilité BDD, facilité de remplissage clients, reporting, gestion des droits",
+        "benefices": "Gain en productivité, cohérence BDD, sécurité renforcée, gestion des réclamations",
+        "parties_prenantes": "Dispositif Médical"
+      },
+      "description": {
+        "fonctionnelle": "Gestion des demandes d'import, fabrication locale et négativité",
+        "utilisateurs": "Évaluateurs, Clients, Administrateur (DSID)",
+        "processus_supportes": "Demande d'import, autorisation fabrication locale et négativité",
+        "frequence_utilisation": "Quotidienne"
+      },
+      "architecture": {
+        "stack_technologique": "PHP, jQuery, AJAX, MySQL",
+        "infrastructure": "XAMP Apache",
+        "donnees_traitees": "MySQL",
+        "integrations": "BD sur Site"
+      },
+      "securite": {
+        "donnees_sensibles": true,
+        "reglementation": "CNDP",
+        "classification": "Haute",
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": "99%",
+        "rto": "1 jour",
+        "rpo": "72 heures",
+        "support_horaire": "Jours de travail"
+      },
+      "risques": {
+        "risques_principaux": "N/A",
+        "impact_arret": "Arrêt de production",
+        "pca": "Non",
+        "plan_mitigation": "Non"
+      },
+      "cycle_vie": {
+        "conception": null,
+        "deploiement": null,
+        "exploitation": "fait",
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En production",
+        "criticite": "Critique",
+        "completude_pct": 87
+      }
+    },
+    {
+      "id": "APP-007",
+      "identification": {
+        "nom": "GIMPS",
+        "categorie": "Métier",
+        "proprietaire": "DMP",
+        "direction_beneficiaire": "Réception, Finances, Évaluation, Inspection",
+        "date_creation": null,
+        "statut_portfolio": "Catalogue",
+        "hebergement": "On-prem",
+        "mode_developpement": "Prestataire",
+        "prestataire": "Nevolys"
+      },
+      "proposition_valeur": {
+        "objectif": "Suivi et traitement des demandes d'autorisation des produits de santé",
+        "probleme_resolu": "Digitaliser la gestion des circuits de traitement de l'agence",
+        "benefices": "Centraliser et digitaliser les circuits de travail",
+        "parties_prenantes": "DSID, Réception, Finances, Évaluation, Inspection"
+      },
+      "description": {
+        "fonctionnelle": "Suivi et traitement des demandes d'autorisation des produits de santé",
+        "utilisateurs": "Administrateur, Chef de Service, Évaluateur, Agent de Saisie",
+        "processus_supportes": "Réception, Finances, Inspection et Évaluation",
+        "frequence_utilisation": "Quotidienne"
+      },
+      "architecture": {
+        "stack_technologique": "SQL Server, .NET",
+        "infrastructure": "Windows Server 2016 Standard v1607",
+        "donnees_traitees": "Textuelle, PDF, img, SQL",
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": true,
+        "reglementation": null,
+        "classification": "Critique",
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": 0.99,
+        "rto": "1 jour",
+        "rpo": "72 heures",
+        "support_horaire": "Jours de travail"
+      },
+      "risques": {
+        "risques_principaux": "Technologie dépréciée",
+        "impact_arret": "Arrêt complet du travail",
+        "pca": "Sauvegarde et restauration",
+        "plan_mitigation": "Sauvegarde et restauration"
+      },
+      "cycle_vie": {
+        "conception": "fait",
+        "deploiement": "fait",
+        "exploitation": "fait",
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En production",
+        "criticite": "Critique",
+        "completude_pct": 87
+      }
+    },
+    {
+      "id": "APP-009",
+      "identification": {
+        "nom": "Attestation Échantillons Médicaux",
+        "categorie": "Métier",
+        "proprietaire": null,
+        "direction_beneficiaire": null,
+        "date_creation": null,
+        "statut_portfolio": "Catalogue",
+        "hebergement": "On-prem",
+        "mode_developpement": "Prestataire",
+        "prestataire": "Digital Performance"
+      },
+      "proposition_valeur": {
+        "objectif": "Gestion des attestations pour le port des échantillons médicaux",
+        "probleme_resolu": null,
+        "benefices": null,
+        "parties_prenantes": null
+      },
+      "description": {
+        "fonctionnelle": "Gestion des attestations pour le port des échantillons médicaux",
+        "utilisateurs": null,
+        "processus_supportes": null,
+        "frequence_utilisation": null
+      },
+      "architecture": {
+        "stack_technologique": "Apache v2.4.58, PHP v5.6.30, SQL Server, jQuery v1.11.3",
+        "infrastructure": null,
+        "donnees_traitees": "Données personnelles",
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": true,
+        "reglementation": null,
+        "classification": null,
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": null,
+        "rto": null,
+        "rpo": null,
+        "support_horaire": null
+      },
+      "risques": {
+        "risques_principaux": null,
+        "impact_arret": null,
+        "pca": null,
+        "plan_mitigation": null
+      },
+      "cycle_vie": {
+        "conception": null,
+        "deploiement": null,
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En production",
+        "criticite": "Moyenne",
+        "completude_pct": 33
+      }
+    },
+    {
+      "id": "APP-014",
+      "identification": {
+        "nom": "e-RBI",
+        "categorie": "Métier",
+        "proprietaire": null,
+        "direction_beneficiaire": null,
+        "date_creation": null,
+        "statut_portfolio": "Pipeline",
+        "hebergement": "On-prem",
+        "mode_developpement": "Prestataire",
+        "prestataire": "ONE TECHNOLOGY"
+      },
+      "proposition_valeur": {
+        "objectif": "Demande d'autorisation de recherche biomédicale",
+        "probleme_resolu": null,
+        "benefices": null,
+        "parties_prenantes": null
+      },
+      "description": {
+        "fonctionnelle": "Demande d'autorisation de recherche biomédicale pour médicaments expérimentaux",
+        "utilisateurs": null,
+        "processus_supportes": "Recherche biomédicale",
+        "frequence_utilisation": null
+      },
+      "architecture": {
+        "stack_technologique": "HammerJS, Typeahead.js, jQuery, Bootstrap 5, PHP, MySQL",
+        "infrastructure": null,
+        "donnees_traitees": "Données confidentielles, données sensibles",
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": true,
+        "reglementation": null,
+        "classification": null,
+        "journalisation": null,
+        "sauvegarde": null
+      },
+      "performance_sla": {
+        "disponibilite_cible": null,
+        "rto": null,
+        "rpo": null,
+        "support_horaire": null
+      },
+      "risques": {
+        "risques_principaux": null,
+        "impact_arret": null,
+        "pca": null,
+        "plan_mitigation": null
+      },
+      "cycle_vie": {
+        "conception": null,
+        "deploiement": null,
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En projet",
+        "criticite": "Élevée",
+        "completude_pct": 31
+      }
+    },
+    {
+      "id": "APP-015",
+      "identification": {
+        "nom": "Tarkhiss",
+        "categorie": "Métier",
+        "proprietaire": "CDG Incept",
+        "direction_beneficiaire": "AMMPS",
+        "date_creation": "02/2026",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "Cloud",
+        "mode_developpement": "Prestataire",
+        "prestataire": "CDG Incept / Ribatis"
+      },
+      "proposition_valeur": {
+        "objectif": "Gestion et suivi du processus d'octroi des autorisations pour les médicaments",
+        "probleme_resolu": null,
+        "benefices": null,
+        "parties_prenantes": null
+      },
+      "description": {
+        "fonctionnelle": "Demande et suivi des autorisations pour les EPI (Établissements Pharmaceutiques et Industriels)",
+        "utilisateurs": null,
+        "processus_supportes": null,
+        "frequence_utilisation": null
+      },
+      "architecture": {
+        "stack_technologique": "Karaz framework, Java",
+        "infrastructure": null,
+        "donnees_traitees": "Données personnelles, sensibles, confidentielles",
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": true,
+        "reglementation": null,
+        "classification": null,
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": null,
+        "rto": null,
+        "rpo": null,
+        "support_horaire": null
+      },
+      "risques": {
+        "risques_principaux": null,
+        "impact_arret": null,
+        "pca": null,
+        "plan_mitigation": null
+      },
+      "cycle_vie": {
+        "conception": null,
+        "deploiement": null,
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En projet",
+        "criticite": "Critique",
+        "completude_pct": 41
+      }
+    },
+    {
+      "id": "APP-016",
+      "identification": {
+        "nom": "Gestion de Délais",
+        "categorie": "Métier",
+        "proprietaire": "DSID",
+        "direction_beneficiaire": "Pôle Inspection",
+        "date_creation": "01/05/2026",
+        "statut_portfolio": "Pipeline",
+        "hebergement": "On-prem",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {
+        "objectif": "Gestion des délais des attestations EPI",
+        "probleme_resolu": "Éviter les retards et dépassements de délai",
+        "benefices": "Être toujours dans les délais",
+        "parties_prenantes": "DSID, Inspection"
+      },
+      "description": {
+        "fonctionnelle": "Assurer le suivi des délais des dossiers fournis à l'AMMPS",
+        "utilisateurs": "Pôle Inspection",
+        "processus_supportes": "Respect et suivi des délais légaux",
+        "frequence_utilisation": "Quotidien"
+      },
+      "architecture": {
+        "stack_technologique": "Java 17, Spring Boot 3.3.0, Node.js, React 18, MySQL 8.4.3",
+        "infrastructure": null,
+        "donnees_traitees": "Dates d'arrivée et délivrance des dossiers",
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": true,
+        "reglementation": "CNDP",
+        "classification": null,
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": 0.99,
+        "rto": "24h",
+        "rpo": "24h",
+        "support_horaire": "Jours ouvrés"
+      },
+      "risques": {
+        "risques_principaux": "Délai non comptabilisé correctement",
+        "impact_arret": "Retard au niveau du respect des délais",
+        "pca": "Back-up",
+        "plan_mitigation": "Back-up"
+      },
+      "cycle_vie": {
+        "conception": "fait",
+        "deploiement": null,
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En projet",
+        "criticite": "Critique",
+        "completude_pct": 79
+      }
+    },
+    {
+      "id": "APP-017",
+      "identification": {
+        "nom": "MA Tracker",
+        "categorie": "Métier",
+        "proprietaire": null,
+        "direction_beneficiaire": null,
+        "date_creation": null,
+        "statut_portfolio": "Pipeline",
+        "hebergement": "On-prem",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {
+        "objectif": "Gestion des délais des AMM (Autorisations de Mise sur le Marché)",
+        "probleme_resolu": null,
+        "benefices": null,
+        "parties_prenantes": null
+      },
+      "description": {
+        "fonctionnelle": "Suivi et gestion des délais liés aux AMM",
+        "utilisateurs": null,
+        "processus_supportes": null,
+        "frequence_utilisation": null
+      },
+      "architecture": {
+        "stack_technologique": "Python, Tkinter, SQLite",
+        "infrastructure": null,
+        "donnees_traitees": null,
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": null,
+        "reglementation": null,
+        "classification": null,
+        "journalisation": null,
+        "sauvegarde": null
+      },
+      "performance_sla": {
+        "disponibilite_cible": null,
+        "rto": null,
+        "rpo": null,
+        "support_horaire": null
+      },
+      "risques": {
+        "risques_principaux": null,
+        "impact_arret": null,
+        "pca": null,
+        "plan_mitigation": null
+      },
+      "cycle_vie": {
+        "conception": null,
+        "deploiement": null,
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En production",
+        "criticite": null,
+        "completude_pct": 21
+      }
+    },
+    {
+      "id": "APP-018",
+      "identification": {
+        "nom": "Intranet Qualité",
+        "categorie": "Métier",
+        "proprietaire": "DSID",
+        "direction_beneficiaire": "Qualité",
+        "date_creation": null,
+        "statut_portfolio": "Pipeline",
+        "hebergement": "Cloud",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {
+        "objectif": "Portail intranet dédié à la gestion de la qualité",
+        "probleme_resolu": "Centraliser la documentation et les processus qualité",
+        "benefices": "Accessibilité et traçabilité documentaire",
+        "parties_prenantes": "DSID, Service Qualité"
+      },
+      "description": {
+        "fonctionnelle": "Portail intranet de gestion documentaire qualité",
+        "utilisateurs": "Personnel AMMPS",
+        "processus_supportes": "Management de la Qualité",
+        "frequence_utilisation": "Quotidien"
+      },
+      "architecture": {
+        "stack_technologique": "SharePoint",
+        "infrastructure": "Microsoft 365",
+        "donnees_traitees": null,
+        "integrations": "Microsoft 365"
+      },
+      "securite": {
+        "donnees_sensibles": false,
+        "reglementation": "ISO 9001 / ISO 17025",
+        "classification": "Moyenne",
+        "journalisation": null,
+        "sauvegarde": null
+      },
+      "performance_sla": {
+        "disponibilite_cible": null,
+        "rto": null,
+        "rpo": null,
+        "support_horaire": null
+      },
+      "risques": {
+        "risques_principaux": null,
+        "impact_arret": null,
+        "pca": null,
+        "plan_mitigation": null
+      },
+      "cycle_vie": {
+        "conception": "fait",
+        "deploiement": null,
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En projet",
+        "criticite": "Moyenne",
+        "completude_pct": 56
+      }
+    },
+    {
+      "id": "APP-019",
+      "identification": {
+        "nom": "LIMS LabVantage (Smart Lab)",
+        "categorie": "Métier",
+        "proprietaire": null,
+        "direction_beneficiaire": "LNCM",
+        "date_creation": null,
+        "statut_portfolio": "Pipeline",
+        "hebergement": "On-prem",
+        "mode_developpement": "Acquisition",
+        "prestataire": "LabVantage Solutions"
+      },
+      "proposition_valeur": {
+        "objectif": "Système LIMS pour la gestion des analyses et données de laboratoire",
+        "probleme_resolu": "Centraliser et automatiser la gestion des données analytiques du laboratoire",
+        "benefices": "Traçabilité complète, conformité réglementaire, gain de productivité",
+        "parties_prenantes": "LNCM, DSID"
+      },
+      "description": {
+        "fonctionnelle": "Gestion intégrée des échantillons, analyses, résultats et instruments de laboratoire",
+        "utilisateurs": "Techniciens et responsables de laboratoire",
+        "processus_supportes": "Analyses de laboratoire",
+        "frequence_utilisation": "Quotidien"
+      },
+      "architecture": {
+        "stack_technologique": "LabVantage LIMS, Java, Oracle DB",
+        "infrastructure": "Serveur dédié",
+        "donnees_traitees": "Données confidentielles",
+        "integrations": null
+      },
+      "securite": {
+        "donnees_sensibles": true,
+        "reglementation": "ISO 17025",
+        "classification": "Haute",
+        "journalisation": true,
+        "sauvegarde": true
+      },
+      "performance_sla": {
+        "disponibilite_cible": null,
+        "rto": null,
+        "rpo": null,
+        "support_horaire": null
+      },
+      "risques": {
+        "risques_principaux": null,
+        "impact_arret": "Arrêt des analyses",
+        "pca": null,
+        "plan_mitigation": null
+      },
+      "cycle_vie": {
+        "conception": null,
+        "deploiement": null,
+        "exploitation": null,
+        "amelioration": null,
+        "retrait": null
+      },
+      "notes": null,
+      "meta": {
+        "statut": "En projet",
+        "criticite": "Critique",
+        "completude_pct": 62
+      }
+    }
+  ]
+}

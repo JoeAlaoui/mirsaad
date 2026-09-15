@@ -1,0 +1,59 @@
+{
+  "statut_portfolio": {
+    "values": [
+      "Pipeline",
+      "Catalogue",
+      "Retraité"
+    ],
+    "descriptions": {
+      "Pipeline": "Service en conception / développement",
+      "Catalogue": "Service en production active",
+      "Retraité": "Service retiré du portefeuille"
+    }
+  },
+  "criticite": {
+    "values": [
+      "Critique",
+      "Élevée",
+      "Moyenne",
+      "Faible"
+    ],
+    "descriptions": {
+      "Critique": "Impact majeur — arrêt total possible",
+      "Élevée": "Impact important sur les opérations",
+      "Moyenne": "Impact modéré",
+      "Faible": "Impact minimal"
+    }
+  },
+  "statut": {
+    "values": [
+      "En production",
+      "En projet",
+      "Obsolète / Arrêt"
+    ],
+    "descriptions": {
+      "En production": "Déployé et utilisé",
+      "En projet": "En cours de développement / déploiement",
+      "Obsolète / Arrêt": "Hors service"
+    }
+  },
+  "hebergement": [
+    "Cloud",
+    "On-prem"
+  ],
+  "mode_developpement": [
+    "Acquisition",
+    "Interne",
+    "Prestataire"
+  ],
+  "categorie": [
+    "Métier",
+    "Support"
+  ],
+  "donnees_sensibles": {
+    "values": [
+      true,
+      false
+    ]
+  }
+}

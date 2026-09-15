@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIRSAAD — AMMPS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-brand">
+            <span class="brand-name">MIRSAAD</span>
+            <span class="brand-name-ar">مرصاد</span>
+        </div>
+        <nav class="topbar-nav" id="main-nav">
+            <a href="#/" data-route="/">Tableau de bord</a>
+            <a href="#/portefeuille" data-route="/portefeuille">Portefeuille</a>
+            <a href="#/analyses" data-route="/analyses">Analyses</a>
+            <a href="#/qualite" data-route="/qualite">Qualité des données</a>
+            <a href="#/rapports" data-route="/rapports">Rapports</a>
+            <a href="#/importer" data-route="/importer">Importer</a>
+            <a href="#/exporter" data-route="/exporter">Exporter</a>
+        </nav>
+    </header>
+
+    <main class="content" id="app">
+        <div class="empty-state">Chargement...</div>
+    </main>
+
+    <footer class="footer">
+        <span>MIRSAAD — Plateforme de pilotage du portefeuille des services SI de l'AMMPS</span>
+    </footer>
+
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/render.js"></script>
+    <script src="/static/js/views.js"></script>
+    <script src="/static/js/router.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
