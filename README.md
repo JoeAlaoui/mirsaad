@@ -14,7 +14,7 @@ Statut actuel : **V0.3** — SPA, design modernisé avec graphiques, organisatio
   explicite requise, backup automatique créé avant l'écriture.
 - **Export** (`/#/exporter`) : fichier Excel professionnel (feuille Synthèse + Inventaire,
   en-têtes stylés, volets figés, filtres automatiques), réimportable tel quel.
-- Le fichier `donnees_portefeuille_AMMPS.json` livré en V0.3 peut maintenant être importé
+- Le fichier `donnees_portefeuille.json` livré en V0.3 peut maintenant être importé
   **directement depuis l'interface**, sans copier manuellement de fichier.
 
 ## Nouveautés V0.4
@@ -38,10 +38,10 @@ Statut actuel : **V0.3** — SPA, design modernisé avec graphiques, organisatio
   développement sur le dashboard ; page **Analyses** complète (criticité, statut, hébergement,
   catégorie, mode de développement, direction bénéficiaire, concentration prestataire).
 - **Aucune donnée métier codée en dur** : `data/services.json` est livré vide. Les données réelles
-  d'un portefeuille (ex. celui de l'AMMPS) sont fournies à part, au format JSON natif MIRSAAD, prêtes
+  d'un portefeuille (ex. celui de de votre SI) sont fournies à part, au format JSON natif MIRSAAD, prêtes
   à être importées (voir plus bas).
 - **Page Paramètres fonctionnelle** : nom de l'organisation, nom complet/officiel, nom de
-  l'application (FR/AR), seuil de complétude — tout est configurable, plus aucun "AMMPS" codé en
+  l'application (FR/AR), seuil de complétude — tout est configurable, plus aucun "Votre Organisation" codé en
   dur nulle part dans le code ou l'interface.
 
 ## Architecture
@@ -109,7 +109,7 @@ Application sur **http://127.0.0.1:5000**.
 ## Importer des données (portefeuille réel)
 
 L'application est livrée **sans aucune donnée de service**. Un fichier séparé
-`donnees_portefeuille_AMMPS.json` (13 services réels de l'AMMPS, extraits du fichier Excel
+`donnees_portefeuille_VotreOrg.json` (13 services réels de l'VotreOrg, extraits du fichier Excel
 d'origine) est fourni en complément, au format JSON natif de MIRSAAD — c'est le format le plus
 fiable pour un import futur car il correspond exactement au modèle interne de l'application (les
 formats Excel/CSV impliqueraient un aplatissement des 32 champs/9 sections et une perte de
@@ -119,7 +119,7 @@ fidélité).
 le fichier :
 
 ```bash
-cp donnees_portefeuille_AMMPS.json mirsaad/data/services.json
+cp donnees_portefeuille_VotreOrg.json mirsaad/data/services.json
 ```
 
 puis en relançant l'application. La complétude, les KPI, les graphiques et le module Qualité se
