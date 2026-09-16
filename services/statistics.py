@@ -19,7 +19,15 @@ def _count_by(services, path):
 def compute_kpis(services):
     total = len(services)
     if total == 0:
-        return {"total": 0}
+        return {
+            "total": 0,
+            "par_statut_portfolio": {}, "par_criticite": {}, "par_mode_developpement": {},
+            "par_hebergement": {}, "par_categorie": {}, "par_direction_beneficiaire": {},
+            "par_prestataire": {}, "par_proprietaire": {},
+            "couverture_gouvernance_pct": 0, "couverture_direction_pct": 0,
+            "couverture_continuite_pct": 0, "taux_dependance_prestataire_pct": 0,
+            "completude_moyenne_pct": 0,
+        }
 
     par_statut_portfolio = _count_by(services, ("identification", "statut_portfolio"))
     par_criticite = _count_by(services, ("meta", "criticite"))

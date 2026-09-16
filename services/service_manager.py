@@ -3,6 +3,12 @@ Logique métier sur les services : accès, recherche, filtres.
 CRUD d'écriture (add/update/delete) prévu pour V0.4 — lecture seule pour le socle V0.2/V0.3.
 """
 
+import re
+import copy
+
+from services.quality import compute_completude_pct
+from services.validation import validate_service_record
+
 SEARCHABLE_PATHS = [
     ("id",),
     ("identification", "nom"),
@@ -86,3 +92,101 @@ class ServiceManager:
     def search_and_filter(self, query=None, filters=None):
         base = self.search(query) if query else self.get_all()
         return self.filter(base, filters or {})
+
+    # ---------- CRUD d'écriture (V0.4) ----------
+
+    @staticmethod
+    def empty_skeleton():
+        return {
+            "identification": {
+                "nom": None, "categorie": None, "proprietaire": None, "direction_beneficiaire": None,
+                "date_creation": None, "statut_portfolio": None, "hebergement": None,
+                "mode_developpement": None, "prestataire": None,
+            },
+            "proposition_valeur": {"objectif": None, "probleme_resolu": None, "benefices": None, "parties_prenantes": None},
+            "description": {"fonctionnelle": None, "utilisateurs": None, "processus_supportes": None, "frequence_utilisation": None},
+            "architecture": {"stack_technologique": None, "infrastructure": None, "donnees_traitees": None, "integrations": None},
+            "securite": {"donnees_sensibles": None, "reglementation": None, "classification": None, "journalisation": None, "sauvegarde": None},
+            "performance_sla": {"disponibilite_cible": None, "rto": None, "rpo": None, "support_horaire": None},
+            "risques": {"risques_principaux": None, "impact_arret": None, "pca": None, "plan_mitigation": None},
+            "cycle_vie": {"conception": None, "deploiement": None, "exploitation": None, "amelioration": None, "retrait": None},
+            "notes": None,
+            "meta": {"statut": None, "criticite": None, "completude_pct": 0},
+        }
+
+    @staticmethod
+    def _deep_merge(target, payload):
+        for key, value in payload.items():
+            if isinstance(value, dict) and isinstance(target.get(key), dict):
+                ServiceManager._deep_merge(target[key], value)
+            else:
+                target[key] = value
+        return target
+
+    def _generate_id(self, services):
+        numbers = []
+        for svc in services:
+            m = re.match(r"APP-(\d+)$", svc.get("id", ""))
+            if m:
+                numbers.append(int(m.group(1)))
+        next_n = (max(numbers) + 1) if numbers else 1
+        return f"APP-{next_n:03d}"
+
+    def _references(self, references_repository):
+        return references_repository.read()
+
+    def create(self, payload, references_repository=None):
+        data = self.repository.read()
+        services = data["services"]
+        references = self._references(references_repository) if references_repository else {}
+
+        requested_id = (payload.get("id") or "").strip() or None
+
+        svc = self.empty_skeleton()
+        svc = self._deep_merge(svc, payload)
+
+        validate_service_record(svc, services, references, new_id=requested_id)
+
+        svc["id"] = requested_id or self._generate_id(services)
+        svc["meta"]["completude_pct"] = compute_completude_pct(svc)
+
+        services.append(svc)
+        data["services"] = services
+        data["metadata"]["total_services"] = len(services)
+        self.repository.write(data, backup=True)
+        return svc
+
+    def update(self, service_id, payload, references_repository=None):
+        data = self.repository.read()
+        services = data["services"]
+        references = self._references(references_repository) if references_repository else {}
+
+        existing = next((s for s in services if s["id"] == service_id), None)
+        if existing is None:
+            return None
+
+        candidate = copy.deepcopy(existing)
+        self._deep_merge(candidate, payload)
+
+        validate_service_record(candidate, services, references, exclude_id=service_id)
+
+        candidate["id"] = service_id
+        candidate["meta"]["completude_pct"] = compute_completude_pct(candidate)
+
+        idx = services.index(existing)
+        services[idx] = candidate
+        data["services"] = services
+        self.repository.write(data, backup=True)
+        return candidate
+
+    def delete(self, service_id):
+        data = self.repository.read()
+        services = data["services"]
+        remaining = [s for s in services if s["id"] != service_id]
+        if len(remaining) == len(services):
+            return False
+
+        data["services"] = remaining
+        data["metadata"]["total_services"] = len(remaining)
+        self.repository.write(data, backup=True)
+        return True

@@ -9,10 +9,16 @@ def create_app():
     from routes.api_dashboard import bp as api_dashboard_bp
     from routes.api_services import bp as api_services_bp
     from routes.api_quality import bp as api_quality_bp
+    from routes.api_settings import bp as api_settings_bp
+    from routes.api_import import bp as api_import_bp
+    from routes.api_export import bp as api_export_bp
 
     app.register_blueprint(api_dashboard_bp)
     app.register_blueprint(api_services_bp)
     app.register_blueprint(api_quality_bp)
+    app.register_blueprint(api_settings_bp)
+    app.register_blueprint(api_import_bp)
+    app.register_blueprint(api_export_bp)
 
     @app.route("/")
     @app.route("/<path:path>")

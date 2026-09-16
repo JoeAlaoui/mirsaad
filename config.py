@@ -10,11 +10,10 @@ class Config:
     DATA_DIR = os.path.join(BASE_DIR, "data")
     SERVICES_FILE = os.path.join(DATA_DIR, "services.json")
     REFERENCES_FILE = os.path.join(DATA_DIR, "references.json")
+    SETTINGS_FILE = os.path.join(DATA_DIR, "settings.json")
     BACKUPS_DIR = os.path.join(DATA_DIR, "backups")
 
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10 Mo, pour les futurs imports Excel
     ALLOWED_IMPORT_EXTENSIONS = {"xlsx"}
-
-    APP_NAME = "MIRSAAD"
-    APP_NAME_AR = "مرصاد"
-    ORGANISATION = "AMMPS"
+    # Le nom de l'application/organisation n'est plus codé en dur ici :
+    # il est géré dynamiquement via data/settings.json et GET/PUT /api/settings.

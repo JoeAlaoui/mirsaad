@@ -1,0 +1,126 @@
+{
+  "metadata": {
+    "application": "MIRSAAD",
+    "version": "test",
+    "source": "fixture",
+    "last_updated": "2026-01-01T00:00:00Z",
+    "total_services": 5
+  },
+  "services": [
+    {
+      "id": "APP-T01",
+      "identification": {
+        "nom": "Portail Démo",
+        "categorie": "Métier",
+        "proprietaire": "Direction Test A",
+        "direction_beneficiaire": "Direction Test A",
+        "date_creation": "01/2024",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "Cloud",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {"objectif": "Objectif démo 1", "probleme_resolu": null, "benefices": null, "parties_prenantes": null},
+      "description": {"fonctionnelle": "Description démo 1", "utilisateurs": null, "processus_supportes": null, "frequence_utilisation": null},
+      "architecture": {"stack_technologique": "MySQL, Python", "infrastructure": null, "donnees_traitees": "Données de test", "integrations": null},
+      "securite": {"donnees_sensibles": true, "reglementation": null, "classification": null, "journalisation": true, "sauvegarde": true},
+      "performance_sla": {"disponibilite_cible": "99%", "rto": "4h", "rpo": "1h", "support_horaire": "8h-18h"},
+      "risques": {"risques_principaux": null, "impact_arret": null, "pca": null, "plan_mitigation": null},
+      "cycle_vie": {"conception": "fait", "deploiement": "fait", "exploitation": "fait", "amelioration": null, "retrait": null},
+      "notes": null,
+      "meta": {"statut": "En production", "criticite": "Critique", "completude_pct": 62}
+    },
+    {
+      "id": "APP-T02",
+      "identification": {
+        "nom": "Registre Test",
+        "categorie": "Métier",
+        "proprietaire": null,
+        "direction_beneficiaire": "Direction Test B",
+        "date_creation": "2023",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "On-premise",
+        "mode_developpement": "Prestataire",
+        "prestataire": "Prestataire Démo"
+      },
+      "proposition_valeur": {"objectif": null, "probleme_resolu": null, "benefices": null, "parties_prenantes": null},
+      "description": {"fonctionnelle": "Description démo 2", "utilisateurs": null, "processus_supportes": null, "frequence_utilisation": null},
+      "architecture": {"stack_technologique": "MySQL, Java", "infrastructure": null, "donnees_traitees": "Données personnelles", "integrations": null},
+      "securite": {"donnees_sensibles": true, "reglementation": null, "classification": null, "journalisation": null, "sauvegarde": null},
+      "performance_sla": {"disponibilite_cible": null, "rto": null, "rpo": "2h", "support_horaire": null},
+      "risques": {"risques_principaux": null, "impact_arret": null, "pca": null, "plan_mitigation": null},
+      "cycle_vie": {"conception": "fait", "deploiement": "fait", "exploitation": "fait", "amelioration": null, "retrait": null},
+      "notes": null,
+      "meta": {"statut": "En production", "criticite": "Critique", "completude_pct": 38}
+    },
+    {
+      "id": "APP-T03",
+      "identification": {
+        "nom": "Suivi Qualité Démo",
+        "categorie": "Support",
+        "proprietaire": "Direction Test C",
+        "direction_beneficiaire": null,
+        "date_creation": "Legacy",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "Cloud",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {"objectif": "Objectif démo 3", "probleme_resolu": null, "benefices": null, "parties_prenantes": null},
+      "description": {"fonctionnelle": null, "utilisateurs": null, "processus_supportes": null, "frequence_utilisation": null},
+      "architecture": {"stack_technologique": "PostgreSQL", "infrastructure": null, "donnees_traitees": null, "integrations": null},
+      "securite": {"donnees_sensibles": false, "reglementation": null, "classification": null, "journalisation": null, "sauvegarde": null},
+      "performance_sla": {"disponibilite_cible": null, "rto": null, "rpo": null, "support_horaire": null},
+      "risques": {"risques_principaux": null, "impact_arret": null, "pca": null, "plan_mitigation": null},
+      "cycle_vie": {"conception": "fait", "deploiement": "en_cours", "exploitation": null, "amelioration": null, "retrait": null},
+      "notes": null,
+      "meta": {"statut": "En projet", "criticite": "Élevée", "completude_pct": 30}
+    },
+    {
+      "id": "APP-T04",
+      "identification": {
+        "nom": "Archivage Démo",
+        "categorie": "Support",
+        "proprietaire": "Direction Test D",
+        "direction_beneficiaire": "Direction Test D",
+        "date_creation": "06/2022",
+        "statut_portfolio": "Catalogue",
+        "hebergement": "On-premise",
+        "mode_developpement": "Prestataire",
+        "prestataire": "Prestataire Démo"
+      },
+      "proposition_valeur": {"objectif": "Objectif démo 4", "probleme_resolu": "Problème démo 4", "benefices": null, "parties_prenantes": null},
+      "description": {"fonctionnelle": "Description démo 4", "utilisateurs": "Utilisateurs internes", "processus_supportes": null, "frequence_utilisation": null},
+      "architecture": {"stack_technologique": "Oracle", "infrastructure": "Serveur dédié", "donnees_traitees": "Archives", "integrations": null},
+      "securite": {"donnees_sensibles": false, "reglementation": null, "classification": null, "journalisation": true, "sauvegarde": true},
+      "performance_sla": {"disponibilite_cible": null, "rto": null, "rpo": null, "support_horaire": null},
+      "risques": {"risques_principaux": "Risque démo", "impact_arret": null, "pca": null, "plan_mitigation": null},
+      "cycle_vie": {"conception": "fait", "deploiement": "fait", "exploitation": "fait", "amelioration": "fait", "retrait": null},
+      "notes": null,
+      "meta": {"statut": "En production", "criticite": "Moyenne", "completude_pct": 66}
+    },
+    {
+      "id": "APP-T05",
+      "identification": {
+        "nom": "Support Démo",
+        "categorie": "Support",
+        "proprietaire": null,
+        "direction_beneficiaire": null,
+        "date_creation": null,
+        "statut_portfolio": "Pipeline",
+        "hebergement": "On-premise",
+        "mode_developpement": "Interne",
+        "prestataire": null
+      },
+      "proposition_valeur": {"objectif": null, "probleme_resolu": null, "benefices": null, "parties_prenantes": null},
+      "description": {"fonctionnelle": null, "utilisateurs": null, "processus_supportes": null, "frequence_utilisation": null},
+      "architecture": {"stack_technologique": null, "infrastructure": null, "donnees_traitees": null, "integrations": null},
+      "securite": {"donnees_sensibles": null, "reglementation": null, "classification": null, "journalisation": null, "sauvegarde": null},
+      "performance_sla": {"disponibilite_cible": null, "rto": null, "rpo": null, "support_horaire": null},
+      "risques": {"risques_principaux": null, "impact_arret": null, "pca": null, "plan_mitigation": null},
+      "cycle_vie": {"conception": "en_cours", "deploiement": null, "exploitation": null, "amelioration": null, "retrait": null},
+      "notes": null,
+      "meta": {"statut": "En projet", "criticite": null, "completude_pct": 7}
+    }
+  ]
+}

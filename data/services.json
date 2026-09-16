@@ -1,14 +1,13 @@
 {
   "metadata": {
     "application": "MIRSAAD",
-    "version": "0.2",
-    "source": "Portefeuille_Services_IT_AMMPS_v0.1.xlsx",
-    "last_updated": "2026-09-15T10:03:14Z",
+    "version": "0.7",
+    "source": null,
+    "last_updated": null,
     "total_services": 13
   },
   "services": [
     {
-      "id": "APP-001",
       "identification": {
         "nom": "DocuTrace Lab",
         "categorie": "Métier",
@@ -69,10 +68,10 @@
         "statut": "En projet",
         "criticite": "Moyenne",
         "completude_pct": 92
-      }
+      },
+      "id": "APP-001"
     },
     {
-      "id": "APP-002",
       "identification": {
         "nom": "VigiUp",
         "categorie": "Métier",
@@ -133,10 +132,10 @@
         "statut": "En projet",
         "criticite": "Critique",
         "completude_pct": 69
-      }
+      },
+      "id": "APP-002"
     },
     {
-      "id": "APP-004",
       "identification": {
         "nom": "Moussanada",
         "categorie": "Support",
@@ -197,10 +196,10 @@
         "statut": "En production",
         "criticite": "Moyenne",
         "completude_pct": 44
-      }
+      },
+      "id": "APP-004"
     },
     {
-      "id": "APP-005",
       "identification": {
         "nom": "Sentinel",
         "categorie": "Métier",
@@ -261,10 +260,10 @@
         "statut": "En projet",
         "criticite": "Critique",
         "completude_pct": 92
-      }
+      },
+      "id": "APP-005"
     },
     {
-      "id": "APP-006",
       "identification": {
         "nom": "E-Services",
         "categorie": "Métier",
@@ -325,10 +324,10 @@
         "statut": "En production",
         "criticite": "Critique",
         "completude_pct": 87
-      }
+      },
+      "id": "APP-006"
     },
     {
-      "id": "APP-007",
       "identification": {
         "nom": "GIMPS",
         "categorie": "Métier",
@@ -389,10 +388,10 @@
         "statut": "En production",
         "criticite": "Critique",
         "completude_pct": 87
-      }
+      },
+      "id": "APP-007"
     },
     {
-      "id": "APP-009",
       "identification": {
         "nom": "Attestation Échantillons Médicaux",
         "categorie": "Métier",
@@ -453,10 +452,10 @@
         "statut": "En production",
         "criticite": "Moyenne",
         "completude_pct": 33
-      }
+      },
+      "id": "APP-009"
     },
     {
-      "id": "APP-014",
       "identification": {
         "nom": "e-RBI",
         "categorie": "Métier",
@@ -517,10 +516,10 @@
         "statut": "En projet",
         "criticite": "Élevée",
         "completude_pct": 31
-      }
+      },
+      "id": "APP-014"
     },
     {
-      "id": "APP-015",
       "identification": {
         "nom": "Tarkhiss",
         "categorie": "Métier",
@@ -581,10 +580,10 @@
         "statut": "En projet",
         "criticite": "Critique",
         "completude_pct": 41
-      }
+      },
+      "id": "APP-015"
     },
     {
-      "id": "APP-016",
       "identification": {
         "nom": "Gestion de Délais",
         "categorie": "Métier",
@@ -645,10 +644,10 @@
         "statut": "En projet",
         "criticite": "Critique",
         "completude_pct": 79
-      }
+      },
+      "id": "APP-016"
     },
     {
-      "id": "APP-017",
       "identification": {
         "nom": "MA Tracker",
         "categorie": "Métier",
@@ -709,10 +708,10 @@
         "statut": "En production",
         "criticite": null,
         "completude_pct": 21
-      }
+      },
+      "id": "APP-017"
     },
     {
-      "id": "APP-018",
       "identification": {
         "nom": "Intranet Qualité",
         "categorie": "Métier",
@@ -773,10 +772,10 @@
         "statut": "En projet",
         "criticite": "Moyenne",
         "completude_pct": 56
-      }
+      },
+      "id": "APP-018"
     },
     {
-      "id": "APP-019",
       "identification": {
         "nom": "LIMS LabVantage (Smart Lab)",
         "categorie": "Métier",
@@ -837,7 +836,8 @@
         "statut": "En projet",
         "criticite": "Critique",
         "completude_pct": 62
-      }
+      },
+      "id": "APP-019"
     }
   ]
 }

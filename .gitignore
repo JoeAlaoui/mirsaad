@@ -2,4 +2,6 @@
 __pycache__/
 data/backups/*.json
 .pytest_cache/
+data/*
+
 

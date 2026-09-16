@@ -6,9 +6,15 @@ const Router = {
     routes: [
         { pattern: /^\/$/, view: "dashboard" },
         { pattern: /^\/portefeuille$/, view: "portfolio" },
+        { pattern: /^\/portefeuille\/nouveau$/, view: "serviceCreate" },
+        { pattern: /^\/portefeuille\/([^/]+)\/modifier$/, view: "serviceEdit", params: ["id"] },
         { pattern: /^\/portefeuille\/([^/]+)$/, view: "detail", params: ["id"] },
         { pattern: /^\/qualite$/, view: "quality" },
-        { pattern: /^\/(analyses|rapports|importer|exporter|parametres)$/, view: "placeholder", params: ["path"], isPath: true },
+        { pattern: /^\/analyses$/, view: "analyses" },
+        { pattern: /^\/parametres$/, view: "settings" },
+        { pattern: /^\/importer$/, view: "importer" },
+        { pattern: /^\/exporter$/, view: "exporter" },
+        { pattern: /^\/(rapports)$/, view: "placeholder", params: ["path"], isPath: true },
     ],
 
     parseHash() {

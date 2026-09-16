@@ -15,6 +15,22 @@ CHAMPS_CRITIQUES = [
 
 SEUIL_COMPLET_PCT = 70  # fiche jugée "complète" si complétude >= 70%
 
+# Sections/champs comptabilisés dans le calcul de complétude (hors id, meta, notes).
+COMPLETENESS_SECTIONS = [
+    "identification", "proposition_valeur", "description",
+    "architecture", "securite", "performance_sla", "risques", "cycle_vie",
+]
+
+
+def compute_completude_pct(svc):
+    """Pourcentage de champs renseignés (non null/vide) parmi les sections comptabilisées."""
+    fields = []
+    for section in COMPLETENESS_SECTIONS:
+        content = svc.get(section) or {}
+        fields.extend(content.values())
+    filled = sum(1 for f in fields if f not in (None, ""))
+    return round(100 * filled / len(fields)) if fields else 0
+
 
 def _get(svc, section, field):
     return svc.get(section, {}).get(field)
@@ -30,12 +46,12 @@ def anomalies_by_category(services):
     return result
 
 
-def completeness_report(services):
+def completeness_report(services, seuil_pct=SEUIL_COMPLET_PCT):
     total = len(services)
     if total == 0:
-        return {"total": 0, "completes": 0, "incompletes": 0, "taux_completude_pct": 0}
+        return {"total": 0, "completes": 0, "incompletes": 0, "taux_completude_pct": 0, "seuil_pct": seuil_pct}
 
-    completes = [s for s in services if s["meta"].get("completude_pct", 0) >= SEUIL_COMPLET_PCT]
+    completes = [s for s in services if s["meta"].get("completude_pct", 0) >= seuil_pct]
     incompletes = [s for s in services if s not in completes]
     taux = round(sum(s["meta"].get("completude_pct", 0) for s in services) / total)
 
@@ -44,13 +60,14 @@ def completeness_report(services):
         "completes": len(completes),
         "incompletes": len(incompletes),
         "taux_completude_pct": taux,
-        "seuil_pct": SEUIL_COMPLET_PCT,
+        "seuil_pct": seuil_pct,
     }
 
 
-def quality_report(services):
+def quality_report(services, seuil_pct=SEUIL_COMPLET_PCT):
+    anomalies = anomalies_by_category(services)
     return {
-        "completude": completeness_report(services),
-        "anomalies": anomalies_by_category(services),
-        "nb_anomalies_total": sum(len(v) for v in anomalies_by_category(services).values()),
+        "completude": completeness_report(services, seuil_pct=seuil_pct),
+        "anomalies": anomalies,
+        "nb_anomalies_total": sum(len(v) for v in anomalies.values()),
     }

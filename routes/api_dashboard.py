@@ -13,8 +13,11 @@ def dashboard():
     data = repo.read()
     services = data["services"]
 
+    settings_repo = JsonRepository(current_app.config["SETTINGS_FILE"])
+    seuil = settings_repo.read().get("seuil_completude_pct", 70)
+
     return jsonify({
         "metadata": data["metadata"],
         "kpis": compute_kpis(services),
-        "quality": quality_report(services),
+        "quality": quality_report(services, seuil_pct=seuil),
     })
