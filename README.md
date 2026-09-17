@@ -36,6 +36,8 @@ import/export, rapports PDF, finition UX/sécurité).
   explicite requise, backup automatique créé avant l'écriture.
 - **Export** (`/#/exporter`) : fichier Excel professionnel (feuille Synthèse + Inventaire,
   en-têtes stylés, volets figés, filtres automatiques), réimportable tel quel.
+- Le fichier `donnees_portefeuille.json` livré en V0.3 peut maintenant être importé
+  **directement depuis l'interface**, sans copier manuellement de fichier.
 
 ## Nouveautés V0.4
 
@@ -52,12 +54,14 @@ import/export, rapports PDF, finition UX/sécurité).
 - **Design modernisé** : animations d'entrée, cartes KPI avec effet de survol, chargement en
   "skeleton", barres de complétude animées.
 - **Graphiques** (Chart.js, chargé via CDN) : répartitions par criticité, hébergement, mode de
-  développement sur le dashboard ; page **Analyses** complète.
-- **Aucune donnée métier codée en dur** : `data/services.json` est livré vide. Les données
-  réelles d'un portefeuille sont fournies à part, au format JSON natif MIRSAAD.
+  développement sur le dashboard ; page **Analyses** complète (criticité, statut, hébergement,
+  catégorie, mode de développement, direction bénéficiaire, concentration prestataire).
+- **Aucune donnée métier codée en dur** : `data/services.json` est livré vide. Les données réelles
+  d'un portefeuille (ex. celui de votre SI) sont fournies à part, au format JSON natif MIRSAAD, prêtes
+  à être importées (voir plus bas).
 - **Page Paramètres fonctionnelle** : nom de l'organisation, nom complet/officiel, nom de
-  l'application (FR/AR), seuil de complétude — tout est configurable, aucune identité
-  d'organisation codée en dur nulle part dans le code ou l'interface.
+  l'application (FR/AR), seuil de complétude — tout est configurable, plus aucun "Votre Organisation" codé en
+  dur nulle part dans le code ou l'interface.
 
 ## Architecture
 
@@ -168,13 +172,23 @@ Voir la note WeasyPrint/GTK dans la section Prérequis ci-dessus.
 
 ## Importer des données (portefeuille réel)
 
-L'application est livrée **sans aucune donnée de service**. Si vous disposez d'un export au
-format JSON natif de MIRSAAD (structure `{"metadata": ..., "services": [...]}`), c'est le format
-le plus fiable pour un import car il correspond exactement au modèle interne de l'application
-(un import Excel simplifié est aussi possible, mais aplatit certains champs détaillés).
+L'application est livrée **sans aucune donnée de service**. Un fichier séparé
+`donnees_portefeuille_VotreOrg.json` (13 services réels de VotreOrg, extraits du fichier Excel
+d'origine) est fourni en complément, au format JSON natif de MIRSAAD — c'est le format le plus
+fiable pour un import car il correspond exactement au modèle interne de l'application (les
+formats Excel/CSV impliqueraient un aplatissement des 32 champs/9 sections et une perte de
+fidélité).
 
 Depuis l'interface : menu **Importer** → sélectionner le fichier → analyser l'aperçu (nouveaux /
 modifiés / inchangés / erreurs) → choisir une stratégie → confirmer.
+
+Si l'interface graphique d'import n'est pas disponible, copier manuellement le fichier puis relancer :
+
+```bash
+cp donnees_portefeuille_VotreOrg.json mirsaad/data/services.json
+```
+
+La complétude, les KPI, les graphiques et le module Qualité se recalculent automatiquement.
 
 ## Configurer l'organisation
 
