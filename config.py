@@ -14,6 +14,6 @@ class Config:
     BACKUPS_DIR = os.path.join(DATA_DIR, "backups")
 
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10 Mo, pour les futurs imports Excel
-    ALLOWED_IMPORT_EXTENSIONS = {"xlsx"}
+    ALLOWED_IMPORT_EXTENSIONS = {"json", "xlsx"}
     # Le nom de l'application/organisation n'est plus codé en dur ici :
     # il est géré dynamiquement via data/settings.json et GET/PUT /api/settings.

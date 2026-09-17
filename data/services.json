@@ -1,10 +1,10 @@
 {
   "metadata": {
     "application": "MIRSAAD",
-    "version": "0.7",
+    "version": "0.9",
     "source": null,
     "last_updated": null,
-    "total_services": 13
+    "total_services": 12
   },
   "services": [
     {
@@ -134,70 +134,6 @@
         "completude_pct": 69
       },
       "id": "APP-002"
-    },
-    {
-      "identification": {
-        "nom": "Moussanada",
-        "categorie": "Support",
-        "proprietaire": "DSID",
-        "direction_beneficiaire": "AMMPS",
-        "date_creation": "03/2026",
-        "statut_portfolio": "Catalogue",
-        "hebergement": "On-prem",
-        "mode_developpement": "Interne",
-        "prestataire": null
-      },
-      "proposition_valeur": {
-        "objectif": "Helpdesk IT — gestion des tickets incidents et demandes",
-        "probleme_resolu": "Centraliser la gestion des incidents et demandes IT",
-        "benefices": "Traçabilité complète et réactivité du support IT",
-        "parties_prenantes": "DSID, AMMPS"
-      },
-      "description": {
-        "fonctionnelle": "Gestion et suivi des tickets via GLPI",
-        "utilisateurs": "DSID, Tous les utilisateurs AMMPS",
-        "processus_supportes": "Support IT",
-        "frequence_utilisation": "Quotidienne"
-      },
-      "architecture": {
-        "stack_technologique": "GLPi",
-        "infrastructure": null,
-        "donnees_traitees": null,
-        "integrations": null
-      },
-      "securite": {
-        "donnees_sensibles": null,
-        "reglementation": null,
-        "classification": null,
-        "journalisation": null,
-        "sauvegarde": null
-      },
-      "performance_sla": {
-        "disponibilite_cible": null,
-        "rto": null,
-        "rpo": null,
-        "support_horaire": null
-      },
-      "risques": {
-        "risques_principaux": null,
-        "impact_arret": null,
-        "pca": null,
-        "plan_mitigation": null
-      },
-      "cycle_vie": {
-        "conception": null,
-        "deploiement": null,
-        "exploitation": null,
-        "amelioration": null,
-        "retrait": null
-      },
-      "notes": null,
-      "meta": {
-        "statut": "En production",
-        "criticite": "Moyenne",
-        "completude_pct": 44
-      },
-      "id": "APP-004"
     },
     {
       "identification": {

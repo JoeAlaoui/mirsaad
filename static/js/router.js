@@ -14,7 +14,7 @@ const Router = {
         { pattern: /^\/parametres$/, view: "settings" },
         { pattern: /^\/importer$/, view: "importer" },
         { pattern: /^\/exporter$/, view: "exporter" },
-        { pattern: /^\/(rapports)$/, view: "placeholder", params: ["path"], isPath: true },
+        { pattern: /^\/rapports$/, view: "rapports" },
     ],
 
     parseHash() {

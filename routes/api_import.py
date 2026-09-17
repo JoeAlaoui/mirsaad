@@ -27,8 +27,9 @@ def preview():
     filename = file.filename or ""
     ext = filename.rsplit(".", 1)[-1].lower() if "." in filename else ""
 
-    if ext not in ("json", "xlsx"):
-        return jsonify({"error": "Format non supporté. Utilisez un fichier .json ou .xlsx."}), 400
+    allowed = current_app.config.get("ALLOWED_IMPORT_EXTENSIONS", {"json", "xlsx"})
+    if ext not in allowed:
+        return jsonify({"error": f"Format non supporté. Utilisez un fichier .{' ou .'.join(sorted(allowed))}."}), 400
 
     file_bytes = file.read()
 

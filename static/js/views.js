@@ -37,13 +37,13 @@ Views.dashboard = async function () {
 
             <div class="kpi-grid">
                 <div class="kpi-card kpi-anim"><div class="kpi-value">${kpis.total}</div><div class="kpi-label">Total services</div></div>
-                <div class="kpi-card kpi-anim"><div class="kpi-value">${kpis.par_statut_portfolio.Catalogue || 0}</div><div class="kpi-label">En catalogue (production)</div></div>
+                <div class="kpi-card kpi-anim accent-ok"><div class="kpi-value">${kpis.par_statut_portfolio.Catalogue || 0}</div><div class="kpi-label">En catalogue (production)</div></div>
                 <div class="kpi-card kpi-anim"><div class="kpi-value">${kpis.par_statut_portfolio.Pipeline || 0}</div><div class="kpi-label">En pipeline</div></div>
-                <div class="kpi-card kpi-anim"><div class="kpi-value">${kpis.par_criticite.Critique || 0}</div><div class="kpi-label">Criticité critique</div></div>
+                <div class="kpi-card kpi-anim accent-crit"><div class="kpi-value">${kpis.par_criticite.Critique || 0}</div><div class="kpi-label">Criticité critique</div></div>
                 <div class="kpi-card kpi-anim"><div class="kpi-value">${kpis.couverture_gouvernance_pct}%</div><div class="kpi-label">Couverture gouvernance</div></div>
-                <div class="kpi-card kpi-anim"><div class="kpi-value">${kpis.couverture_continuite_pct}%</div><div class="kpi-label">Couverture continuité (RTO/RPO)</div></div>
+                <div class="kpi-card kpi-anim accent-warn"><div class="kpi-value">${kpis.couverture_continuite_pct}%</div><div class="kpi-label">Couverture continuité (RTO/RPO)</div></div>
                 <div class="kpi-card kpi-anim"><div class="kpi-value">${kpis.taux_dependance_prestataire_pct}%</div><div class="kpi-label">Dépendance prestataire</div></div>
-                <div class="kpi-card kpi-anim"><div class="kpi-value">${kpis.completude_moyenne_pct}%</div><div class="kpi-label">Complétude moyenne</div></div>
+                <div class="kpi-card kpi-anim accent-ok"><div class="kpi-value">${kpis.completude_moyenne_pct}%</div><div class="kpi-label">Complétude moyenne</div></div>
             </div>
 
             <div class="panel">
@@ -252,6 +252,7 @@ Views.detail = async function (params) {
                     </p>
                 </div>
                 <div class="header-actions">
+                    <a href="/api/reports/pdf/${encodeURIComponent(svc.id)}" class="btn">Télécharger la fiche PDF</a>
                     <a href="#/portefeuille/${encodeURIComponent(svc.id)}/modifier" class="btn">Modifier</a>
                     <button type="button" id="delete-btn" class="btn btn-danger">Supprimer</button>
                 </div>
@@ -657,10 +658,32 @@ Views.exporter = function () {
     `);
 };
 
-// ---------- Placeholders (pages futures) ----------
-const PLACEHOLDERS = {
-    "/rapports": ["Rapports", "Génération PDF (WeasyPrint) — prévu V0.8."],
+// ---------- Rapports ----------
+Views.rapports = function () {
+    Render.setApp(`
+        <div class="page-header">
+            <h1>Rapports</h1>
+            <p>Rapport PDF institutionnel — couverture, synthèse et une page par service</p>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <p>Le rapport complet contient une page de couverture, une synthèse (indicateurs et
+                graphiques) puis une page détaillée par service du portefeuille.</p>
+                <a href="/api/reports/pdf" class="btn btn-primary">Télécharger le rapport complet (PDF)</a>
+            </div>
+        </div>
+
+        <div class="panel">
+            <div class="panel-body">
+                <p>Pour la fiche PDF d'un seul service, ouvrez sa page dans le <a href="#/portefeuille">portefeuille</a> et utilisez le bouton « Télécharger la fiche PDF ».</p>
+            </div>
+        </div>
+    `);
 };
+
+// ---------- Placeholders (pages futures) ----------
+const PLACEHOLDERS = {};
 
 Views.placeholder = function (params) {
     const [title, desc] = PLACEHOLDERS[params.path] || ["Page", "Contenu non disponible."];

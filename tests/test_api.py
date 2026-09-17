@@ -172,6 +172,27 @@ def test_quality_threshold_affects_completeness(client):
     assert data["report"]["completude"]["completes"] == 4
 
 
+# ---------- Sécurité (V0.9) ----------
+
+def test_import_rejects_unsupported_extension(client):
+    from io import BytesIO
+    data = {"file": (BytesIO(b"contenu quelconque"), "malware.exe")}
+    res = client.post("/api/import/preview", data=data, content_type="multipart/form-data")
+    assert res.status_code == 400
+    assert "error" in res.get_json()
+
+
+def test_import_missing_file_rejected(client):
+    res = client.post("/api/import/preview", data={}, content_type="multipart/form-data")
+    assert res.status_code == 400
+
+
+def test_404_error_is_json_for_api_routes(client):
+    res = client.get("/api/totally/unknown/route")
+    assert res.status_code == 404
+    assert res.content_type.startswith("application/json")
+
+
 # ---------- CRUD (V0.4) ----------
 
 def test_create_service_success(client):
