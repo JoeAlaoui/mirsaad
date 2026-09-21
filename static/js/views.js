@@ -418,11 +418,36 @@ Views.settings = async function () {
     Render.loading();
     try {
         const settings = await Api.getSettings();
+        const currentTheme = settings.theme || "institutionnel";
+
+        const themeCard = (value, label, previewClass) => `
+            <div class="theme-option ${value === currentTheme ? "selected" : ""}" data-theme-value="${value}">
+                <div class="theme-preview ${previewClass}">
+                    <div class="theme-preview-sidebar"></div>
+                    <div class="theme-preview-body">
+                        <div class="theme-preview-chip"></div>
+                        <div class="theme-preview-chip"></div>
+                        <div class="theme-preview-chip"></div>
+                    </div>
+                </div>
+                <div class="theme-option-label">${Render.escape(label)}</div>
+            </div>`;
 
         Render.setApp(`
             <div class="page-header">
                 <h1>Paramètres</h1>
                 <p>Identité de l'organisation et réglages de l'application</p>
+            </div>
+
+            <div class="panel">
+                <div class="panel-header">Thème de l'application</div>
+                <div class="panel-body">
+                    <div class="theme-picker" id="theme-picker">
+                        ${themeCard("institutionnel", "Institutionnel", "preview-institutionnel")}
+                        ${themeCard("moderne", "Moderne", "preview-moderne")}
+                    </div>
+                    <input type="hidden" id="theme-value" value="${Render.escape(currentTheme)}">
+                </div>
             </div>
 
             <form class="panel" id="settings-form">
@@ -456,12 +481,24 @@ Views.settings = async function () {
             <button type="button" id="settings-save" class="btn btn-primary">Enregistrer les paramètres</button>
         `);
 
+        // Aperçu instantané au clic ; la sauvegarde effective se fait via le bouton dédié.
+        document.querySelectorAll("#theme-picker .theme-option").forEach((el) => {
+            el.addEventListener("click", () => {
+                const value = el.getAttribute("data-theme-value");
+                document.getElementById("theme-value").value = value;
+                document.querySelectorAll("#theme-picker .theme-option").forEach((o) => o.classList.remove("selected"));
+                el.classList.add("selected");
+                document.body.setAttribute("data-theme", value);
+            });
+        });
+
         document.getElementById("settings-save").addEventListener("click", async () => {
             const feedback = document.getElementById("settings-feedback");
             const data1 = new FormData(document.getElementById("settings-form"));
             const data2 = new FormData(document.getElementById("settings-form-2"));
             const payload = Object.fromEntries([...data1.entries(), ...data2.entries()]);
             payload.seuil_completude_pct = parseInt(payload.seuil_completude_pct, 10);
+            payload.theme = document.getElementById("theme-value").value;
 
             try {
                 const updated = await Api.updateSettings(payload);

@@ -38,6 +38,7 @@ def client(tmp_path):
         "application_name": "MIRSAAD",
         "application_name_ar": "مرصاد",
         "seuil_completude_pct": 70,
+        "theme": "institutionnel",
     }
     (data_dir / "settings.json").write_text(json.dumps(settings, ensure_ascii=False), encoding="utf-8")
 
@@ -154,6 +155,17 @@ def test_settings_update_rejects_unknown_field(client):
 
 def test_settings_update_validates_seuil_range(client):
     res = client.put("/api/settings", json={"seuil_completude_pct": 150})
+    assert res.status_code == 400
+
+
+def test_settings_update_accepts_valid_theme(client):
+    res = client.put("/api/settings", json={"theme": "moderne"})
+    assert res.status_code == 200
+    assert res.get_json()["theme"] == "moderne"
+
+
+def test_settings_update_rejects_unknown_theme(client):
+    res = client.put("/api/settings", json={"theme": "inexistant"})
     assert res.status_code == 400
 
 

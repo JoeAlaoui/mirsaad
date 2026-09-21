@@ -117,7 +117,8 @@ const ServiceForm = {
             }
 
             if (field.type === "select") {
-                const options = (references[field.refKey] && (references[field.refKey].values || references[field.refKey])) || [];
+                const raw = references[field.refKey];
+                const options = Array.isArray(raw) ? raw : (raw && Array.isArray(raw.values) ? raw.values : []);
                 return `
                     <label class="form-field">
                         <span>${Render.escape(field.label)}</span>
@@ -148,6 +149,12 @@ const ServiceForm = {
         // Champs de meta.criticite / meta.statut, ajoutés hors schéma (section réservée)
         const metaCriticite = svc ? svc.meta.criticite : null;
         const metaStatut = svc ? svc.meta.statut : null;
+        const statutOptions = Array.isArray(references.statut)
+            ? references.statut
+            : (references.statut && Array.isArray(references.statut.values) ? references.statut.values : ["En production", "En projet", "Obsolète / Arrêt"]);
+        const criticiteOptions = Array.isArray(references.criticite)
+            ? references.criticite
+            : (references.criticite && Array.isArray(references.criticite.values) ? references.criticite.values : []);
         const metaHtml = `
             <div class="panel">
                 <div class="panel-header">Pilotage</div>
@@ -156,7 +163,7 @@ const ServiceForm = {
                         <span>Statut</span>
                         <select name="meta.statut">
                             <option value="">—</option>
-                            ${(references.statut ? references.statut.values || references.statut : ["En production", "En projet", "Obsolète / Arrêt"])
+                            ${statutOptions
                                 .map((o) => `<option value="${Render.escape(o)}" ${o === metaStatut ? "selected" : ""}>${Render.escape(o)}</option>`)
                                 .join("")}
                         </select>
@@ -165,7 +172,7 @@ const ServiceForm = {
                         <span>Criticité</span>
                         <select name="meta.criticite">
                             <option value="">—</option>
-                            ${(references.criticite.values || references.criticite)
+                            ${criticiteOptions
                                 .map((o) => `<option value="${Render.escape(o)}" ${o === metaCriticite ? "selected" : ""}>${Render.escape(o)}</option>`)
                                 .join("")}
                         </select>

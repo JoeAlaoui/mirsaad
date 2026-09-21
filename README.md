@@ -5,6 +5,21 @@ Plateforme de pilotage et de visibilité du portefeuille des services SI.
 Statut actuel : **V0.9** — application complète (analyse, socle SPA, CRUD, dashboard, qualité,
 import/export, rapports PDF, finition UX/sécurité).
 
+## Nouveautés — Thèmes, correctifs Windows et corrections
+
+- **Sélecteur de thème** (`/#/parametres`) : deux thèmes disponibles — **Institutionnel** (par
+  défaut, navy/sobre) et **Moderne** (sidebar, cartes pastel arrondies, accent violet). Choix
+  persisté dans `settings.json`, appliqué dynamiquement via `data-theme` sur `<body>`.
+- **Correctif** : les listes déroulantes du formulaire d'ajout/modification de service («
+  Modifier », « Ajouter ») provoquaient une erreur `options.map is not a function` — cause :
+  `tableau.values` renvoie la méthode native `Array.prototype.values` plutôt que `undefined`
+  pour un tableau JS classique. Corrigé avec une détection explicite `Array.isArray()`.
+- **Windows / WeasyPrint** : `app.py` ajoute désormais `C:\msys64\ucrt64\bin` au `PATH` et aux
+  répertoires de recherche de DLL dès le démarrage (résout `OSError: cannot load library
+  'gobject-2.0-0'`). Voir la section Prérequis Windows ci-dessous.
+- **`requirements.txt` nettoyé** : `XlsxWriter` et `seaborn` retirés (non utilisés dans le code —
+  l'export Excel repose sur `openpyxl`, les graphiques PDF sur `matplotlib` seul).
+
 ## Nouveautés V0.9 — Finition
 
 - **Responsive** : media queries pour mobile/tablette (navigation, grilles KPI, formulaires,
@@ -36,8 +51,6 @@ import/export, rapports PDF, finition UX/sécurité).
   explicite requise, backup automatique créé avant l'écriture.
 - **Export** (`/#/exporter`) : fichier Excel professionnel (feuille Synthèse + Inventaire,
   en-têtes stylés, volets figés, filtres automatiques), réimportable tel quel.
-- Le fichier `donnees_portefeuille.json` livré en V0.3 peut maintenant être importé
-  **directement depuis l'interface**, sans copier manuellement de fichier.
 
 ## Nouveautés V0.4
 
@@ -54,14 +67,12 @@ import/export, rapports PDF, finition UX/sécurité).
 - **Design modernisé** : animations d'entrée, cartes KPI avec effet de survol, chargement en
   "skeleton", barres de complétude animées.
 - **Graphiques** (Chart.js, chargé via CDN) : répartitions par criticité, hébergement, mode de
-  développement sur le dashboard ; page **Analyses** complète (criticité, statut, hébergement,
-  catégorie, mode de développement, direction bénéficiaire, concentration prestataire).
-- **Aucune donnée métier codée en dur** : `data/services.json` est livré vide. Les données réelles
-  d'un portefeuille (ex. celui de votre SI) sont fournies à part, au format JSON natif MIRSAAD, prêtes
-  à être importées (voir plus bas).
+  développement sur le dashboard ; page **Analyses** complète.
+- **Aucune donnée métier codée en dur** : `data/services.json` est livré vide. Les données
+  réelles d'un portefeuille sont fournies à part, au format JSON natif MIRSAAD.
 - **Page Paramètres fonctionnelle** : nom de l'organisation, nom complet/officiel, nom de
-  l'application (FR/AR), seuil de complétude — tout est configurable, plus aucun "Votre Organisation" codé en
-  dur nulle part dans le code ou l'interface.
+  l'application (FR/AR), seuil de complétude — tout est configurable, aucune identité
+  d'organisation codée en dur nulle part dans le code ou l'interface.
 
 ## Architecture
 
@@ -114,17 +125,21 @@ mirsaad/
   en l'absence de compilateur C installé (voir Dépannage Windows plus bas).
 - Connexion internet pour charger Chart.js depuis le CDN (`cdn.jsdelivr.net`) — à héberger en
   local si l'environnement de déploiement n'a pas accès à internet.
-- **Windows uniquement** : WeasyPrint nécessite les bibliothèques GTK (Pango/Cairo/GObject).
-  La façon la plus simple de les obtenir est d'installer **[MSYS2](https://www.msys2.org/)**
-  (dans `C:\msys64` par défaut), puis dans un terminal MSYS2 UCRT64 :
-  ```
-  pacman -S mingw-w64-ucrt-x86_64-pango
-  ```
-  `app.py` configure automatiquement `WEASYPRINT_DLL_DIRECTORIES` vers
-  `C:\msys64\ucrt64\bin` au démarrage sous Windows. Si MSYS2 est installé ailleurs, définissez
-  vous-même la variable d'environnement `WEASYPRINT_DLL_DIRECTORIES` avec le bon chemin avant de
-  lancer l'application. Sans cette bibliothèque, la génération de rapport PDF échoue avec une
-  erreur mentionnant `libgobject` ou `cairo`.
+
+### 🛠️ Prérequis spécifiques pour Windows (Génération PDF - WeasyPrint)
+WeasyPrint nécessite les moteurs graphiques système Pango et GObject pour compiler les PDF sous Windows.
+
+1. Téléchargez et installez **MSYS2** depuis le site officiel : https://msys2.org
+2. À la fin de l'installation, ouvrez le terminal noir **MSYS2 UCRT64** et exécutez la commande suivante :
+   ```bash
+   pacman -S mingw-w64-ucrt-x86_64-pango
+   ```
+3. Validez par `Y`, attendez la fin du téléchargement puis fermez le terminal MSYS2.
+4. Si vous utilisez un environnement virtuel, activez-le toujours via PowerShell (`.\.venv\Scripts\Activate.ps1`) avant de lancer `python app.py`.
+
+`app.py` ajoute automatiquement `C:\msys64\ucrt64\bin` au `PATH` et aux répertoires de recherche
+de DLL au démarrage sous Windows (voir tout en haut du fichier). Si MSYS2 est installé ailleurs
+qu'à cet emplacement par défaut, modifiez la variable `msys_bin` en tête d'`app.py` en conséquence.
 
 ## Installation
 
@@ -172,23 +187,13 @@ Voir la note WeasyPrint/GTK dans la section Prérequis ci-dessus.
 
 ## Importer des données (portefeuille réel)
 
-L'application est livrée **sans aucune donnée de service**. Un fichier séparé
-`donnees_portefeuille_VotreOrg.json` (13 services réels de VotreOrg, extraits du fichier Excel
-d'origine) est fourni en complément, au format JSON natif de MIRSAAD — c'est le format le plus
-fiable pour un import car il correspond exactement au modèle interne de l'application (les
-formats Excel/CSV impliqueraient un aplatissement des 32 champs/9 sections et une perte de
-fidélité).
+L'application est livrée **sans aucune donnée de service**. Si vous disposez d'un export au
+format JSON natif de MIRSAAD (structure `{"metadata": ..., "services": [...]}`), c'est le format
+le plus fiable pour un import car il correspond exactement au modèle interne de l'application
+(un import Excel simplifié est aussi possible, mais aplatit certains champs détaillés).
 
 Depuis l'interface : menu **Importer** → sélectionner le fichier → analyser l'aperçu (nouveaux /
 modifiés / inchangés / erreurs) → choisir une stratégie → confirmer.
-
-Si l'interface graphique d'import n'est pas disponible, copier manuellement le fichier puis relancer :
-
-```bash
-cp donnees_portefeuille_VotreOrg.json mirsaad/data/services.json
-```
-
-La complétude, les KPI, les graphiques et le module Qualité se recalculent automatiquement.
 
 ## Configurer l'organisation
 

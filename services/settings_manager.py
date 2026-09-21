@@ -9,9 +9,12 @@ ALLOWED_KEYS = {
     "application_name",
     "application_name_ar",
     "seuil_completude_pct",
+    "theme",
 }
 
 REQUIRED_KEYS = {"organisation_name", "application_name"}
+
+ALLOWED_THEMES = {"institutionnel", "moderne"}
 
 
 class SettingsValidationError(Exception):
@@ -37,6 +40,9 @@ def validate_settings(payload):
             raise SettingsValidationError("Le seuil de complétude doit être un entier.")
         if not (0 <= v <= 100):
             raise SettingsValidationError("Le seuil de complétude doit être compris entre 0 et 100.")
+
+    if "theme" in payload and payload["theme"] not in ALLOWED_THEMES:
+        raise SettingsValidationError(f"Thème inconnu : « {payload['theme']} » (valeurs autorisées : {', '.join(sorted(ALLOWED_THEMES))}).")
 
     return True
 

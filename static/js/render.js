@@ -81,6 +81,8 @@ const Render = {
         document.getElementById("brand-name").textContent = appName;
         document.getElementById("brand-name-ar").textContent = appNameAr;
         document.getElementById("footer-org").textContent = org;
+
+        document.body.setAttribute("data-theme", settings.theme || "institutionnel");
     },
 
     // ---------- Notifications ----------

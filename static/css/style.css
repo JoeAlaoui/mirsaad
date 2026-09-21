@@ -529,3 +529,171 @@ table.data-table a:hover { text-decoration: underline; }
 .toast-success { background: var(--ok); }
 .toast-error { background: var(--crit-critique); }
 .toast-out { opacity: 0; transform: translateX(20px); }
+
+/* ============================================================
+   THÈME "MODERNE" — activé via body[data-theme="moderne"]
+   Inspiré d'une maquette EdTech fournie : sidebar, cartes pastel
+   rotatives, coins très arrondis, accent violet/lime.
+   Les couleurs sémantiques (criticité) restent inchangées.
+   ============================================================ */
+body[data-theme="moderne"] {
+    background: #f6f5fb;
+}
+
+/* --- Sidebar (remplace la barre horizontale) --- */
+body[data-theme="moderne"] .topbar {
+    background: #ffffff;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    width: 234px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding: 22px 14px;
+    gap: 26px;
+    box-shadow: 1px 0 0 rgba(20, 10, 50, 0.06);
+}
+
+body[data-theme="moderne"] .topbar-brand {
+    padding: 0 8px;
+    gap: 8px;
+}
+
+body[data-theme="moderne"] .brand-mark {
+    background: linear-gradient(135deg, #8b6cff, #c3a6ff);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(139, 108, 255, 0.35);
+}
+
+body[data-theme="moderne"] .brand-name { color: #201c33; letter-spacing: 0.4px; }
+body[data-theme="moderne"] .brand-name-ar { color: #a79ccb; font-size: 12px; }
+
+body[data-theme="moderne"] .topbar-nav {
+    flex-direction: column;
+    gap: 3px;
+}
+
+body[data-theme="moderne"] .topbar-nav a {
+    color: #4a4560;
+    font-weight: 600;
+    padding: 10px 12px;
+    border-radius: 12px;
+}
+
+body[data-theme="moderne"] .topbar-nav a:hover { background: #f4f2fb; color: #201c33; }
+body[data-theme="moderne"] .topbar-nav a.active { background: #d9f5c4; color: #1c2b0f; }
+body[data-theme="moderne"] .nav-icon { opacity: 1; }
+
+/* --- Décalage du contenu pour la sidebar --- */
+body[data-theme="moderne"] .content { margin: 0 0 0 234px; max-width: none; padding: 30px 36px; }
+body[data-theme="moderne"] .footer { margin-left: 234px; }
+
+/* --- Coins arrondis généralisés + ombres douces --- */
+body[data-theme="moderne"] .panel,
+body[data-theme="moderne"] .kpi-card,
+body[data-theme="moderne"] .skeleton-panel,
+body[data-theme="moderne"] .skeleton-card {
+    border-radius: 18px;
+    box-shadow: 0 2px 14px rgba(90, 70, 160, 0.07);
+}
+
+body[data-theme="moderne"] .panel { border-color: #eeecf7; }
+body[data-theme="moderne"] .panel-header { border-radius: 18px 18px 0 0; }
+
+/* --- Cartes KPI pastel rotatives (façon "cours") --- */
+body[data-theme="moderne"] .kpi-card { border: none; background: #eef0fb; }
+body[data-theme="moderne"] .kpi-grid .kpi-card:nth-child(4n+1) { background: #ffead0; }
+body[data-theme="moderne"] .kpi-grid .kpi-card:nth-child(4n+2) { background: #e8e0fe; }
+body[data-theme="moderne"] .kpi-grid .kpi-card:nth-child(4n+3) { background: #dcf6e2; }
+body[data-theme="moderne"] .kpi-grid .kpi-card:nth-child(4n) { background: #dcedff; }
+body[data-theme="moderne"] .kpi-value { color: #201c33; }
+body[data-theme="moderne"] .kpi-label { color: #6b6580; }
+
+/* --- Boutons pilule --- */
+body[data-theme="moderne"] .btn { border-radius: 999px; border-color: #e5e1f5; }
+body[data-theme="moderne"] .btn:hover { border-color: #c9c0ec; }
+body[data-theme="moderne"] .btn-primary { background: #8b6cff; border-color: #8b6cff; }
+body[data-theme="moderne"] .btn-primary:hover { background: #7752f5; box-shadow: 0 3px 10px rgba(139, 108, 255, 0.35); }
+body[data-theme="moderne"] .btn-danger { border-color: var(--crit-critique); }
+
+/* --- Formulaires / filtres arrondis --- */
+body[data-theme="moderne"] .filter-bar input,
+body[data-theme="moderne"] .filter-bar select,
+body[data-theme="moderne"] .form-field input,
+body[data-theme="moderne"] .form-field select,
+body[data-theme="moderne"] .form-field textarea,
+body[data-theme="moderne"] .settings-grid input {
+    border-radius: 12px;
+    border-color: #e5e1f5;
+}
+
+body[data-theme="moderne"] .filter-bar input:focus,
+body[data-theme="moderne"] .form-field input:focus,
+body[data-theme="moderne"] .form-field select:focus,
+body[data-theme="moderne"] .form-field textarea:focus,
+body[data-theme="moderne"] .settings-grid input:focus {
+    border-color: #8b6cff;
+    box-shadow: 0 0 0 3px rgba(139, 108, 255, 0.16);
+}
+
+/* --- Tableaux --- */
+body[data-theme="moderne"] table.data-table th { background: #faf9ff; color: #8b85a0; }
+body[data-theme="moderne"] table.data-table tr:hover td { background: #f6f3ff; }
+body[data-theme="moderne"] .completude-fill { background: linear-gradient(90deg, #8b6cff, #c3a6ff); }
+
+/* --- Sélecteur de thème (page Paramètres) --- */
+.theme-picker { display: flex; gap: 14px; flex-wrap: wrap; }
+.theme-option {
+    width: 200px;
+    border: 2px solid var(--slate-200);
+    border-radius: 14px;
+    padding: 12px;
+    cursor: pointer;
+    transition: border-color 0.15s var(--ease), transform 0.15s var(--ease);
+    background: var(--white);
+}
+.theme-option:hover { transform: translateY(-2px); }
+.theme-option.selected { border-color: var(--accent); }
+.theme-preview {
+    height: 70px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    overflow: hidden;
+}
+.theme-preview-sidebar { width: 30%; }
+.theme-preview-body { flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 6px; }
+.theme-preview-chip { height: 10px; border-radius: 3px; }
+.theme-option-label { font-size: 12.5px; font-weight: 700; color: var(--navy-900); }
+
+/* Aperçu thème "Institutionnel" */
+.theme-preview.preview-institutionnel { background: var(--slate-100); }
+.theme-preview.preview-institutionnel .theme-preview-sidebar { background: #101a2e; }
+.theme-preview.preview-institutionnel .theme-preview-chip:nth-child(1) { background: #0f4c81; width: 60%; }
+.theme-preview.preview-institutionnel .theme-preview-chip:nth-child(2) { background: #dde3ec; width: 90%; }
+.theme-preview.preview-institutionnel .theme-preview-chip:nth-child(3) { background: #dde3ec; width: 75%; }
+
+/* Aperçu thème "Moderne" */
+.theme-preview.preview-moderne { background: #f6f5fb; }
+.theme-preview.preview-moderne .theme-preview-sidebar { background: #ffffff; }
+.theme-preview.preview-moderne .theme-preview-chip:nth-child(1) { background: #ffead0; width: 55%; }
+.theme-preview.preview-moderne .theme-preview-chip:nth-child(2) { background: #e8e0fe; width: 90%; }
+.theme-preview.preview-moderne .theme-preview-chip:nth-child(3) { background: #dcf6e2; width: 70%; }
+
+/* --- Sidebar responsive : redevient une barre horizontale en dessous de 900px --- */
+@media (max-width: 900px) {
+    body[data-theme="moderne"] .topbar {
+        position: static;
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px;
+    }
+    body[data-theme="moderne"] .topbar-nav { flex-direction: row; flex-wrap: wrap; }
+    body[data-theme="moderne"] .content,
+    body[data-theme="moderne"] .footer { margin-left: 0; }
+}

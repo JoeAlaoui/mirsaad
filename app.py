@@ -1,22 +1,16 @@
 import os
 import sys
 
-if sys.platform == 'win32':
-    msys_bin = r'C:\msys64\ucrt64\bin'
+# Sous Windows, WeasyPrint a besoin de localiser les DLL Pango/GObject (fournies par MSYS2,
+# voir README section "Prérequis spécifiques pour Windows"). Sans cela : OSError
+# "cannot load library 'gobject-2.0-0'". Ce bloc doit rester tout en haut du fichier,
+# avant tout import qui charge WeasyPrint (directement ou indirectement).
+if sys.platform == "win32":
+    msys_bin = r"C:\msys64\ucrt64\bin"
     if os.path.exists(msys_bin):
-        os.environ['PATH'] = msys_bin + os.pathsep + os.environ.get('PATH', '')
-        if hasattr(os, 'add_dll_directory'):
+        os.environ["PATH"] = msys_bin + os.pathsep + os.environ.get("PATH", "")
+        if hasattr(os, "add_dll_directory"):
             os.add_dll_directory(msys_bin)
-
-
-
-
-
-# Sous Windows, WeasyPrint a besoin de localiser les bibliothèques GTK (Pango/Cairo/GObject).
-# Si elles sont installées via MSYS2 (voir README, section Prérequis), on indique explicitement
-# leur emplacement. Cette variable est ignorée sans effet sur Linux/macOS.
-if os.name == "nt":
-    os.environ.setdefault("WEASYPRINT_DLL_DIRECTORIES", r"C:\msys64\ucrt64\bin")
 
 from flask import Flask, send_from_directory
 from config import Config

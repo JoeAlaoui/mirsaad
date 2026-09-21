@@ -3,5 +3,6 @@
   "organisation_name_complete": "",
   "application_name": "MIRSAAD",
   "application_name_ar": "مرصاد",
-  "seuil_completude_pct": 70
+  "seuil_completude_pct": 70,
+  "theme": "institutionnel"
 }
