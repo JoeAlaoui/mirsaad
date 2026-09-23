@@ -5,6 +5,23 @@ Plateforme de pilotage et de visibilité du portefeuille des services SI.
 Statut actuel : **V0.9** — application complète (analyse, socle SPA, CRUD, dashboard, qualité,
 import/export, rapports PDF, finition UX/sécurité).
 
+## Nouveautés — 3 thèmes, personnalisation PDF, design system exportable
+
+- **Troisième thème "Ant Design"** : palette bleu `#1677ff`, coins à 6px, ombres subtiles,
+  fidèle au design system Ant Design 5. Barre horizontale claire (contrairement à "Moderne" qui
+  utilise une sidebar). Sélectionnable dans `/#/parametres`, aux côtés de "Institutionnel" et
+  "Moderne".
+- **Personnalisation des rapports PDF** (`/#/parametres`, panneau "Rapports PDF") :
+  - Page de garde : logo + nom MIRSAAD (par défaut), ou texte personnalisé sans logo
+    (ex. "Portefeuille de Services").
+  - Pied de page : vide, ou texte personnalisé + nom de l'organisation. La numérotation des
+    pages et la date de génération restent **toujours affichées** (à droite), quel que soit le
+    choix.
+- **Design system "Moderne" exportable** : livré en complément sous forme de fichiers autonomes
+  (`theme-moderne.css` + `THEME-MODERNE.md`), réutilisables dans n'importe quel projet HTML/CSS
+  sans dépendance à MIRSAAD — palette, composants (sidebar, cartes pastel, boutons, tableaux),
+  exemple de page complet.
+
 ## Nouveautés — Thèmes, correctifs Windows et corrections
 
 - **Sélecteur de thème** (`/#/parametres`) : deux thèmes disponibles — **Institutionnel** (par

@@ -164,6 +164,29 @@ def test_settings_update_accepts_valid_theme(client):
     assert res.get_json()["theme"] == "moderne"
 
 
+def test_settings_update_accepts_ant_theme(client):
+    res = client.put("/api/settings", json={"theme": "ant"})
+    assert res.status_code == 200
+    assert res.get_json()["theme"] == "ant"
+
+
+def test_settings_update_accepts_pdf_customization(client):
+    res = client.put("/api/settings", json={
+        "pdf_cover_mode": "texte",
+        "pdf_footer_mode": "vide",
+        "pdf_custom_text": "Portefeuille de Services",
+    })
+    assert res.status_code == 200
+    data = res.get_json()
+    assert data["pdf_cover_mode"] == "texte"
+    assert data["pdf_footer_mode"] == "vide"
+
+
+def test_settings_update_rejects_unknown_pdf_cover_mode(client):
+    res = client.put("/api/settings", json={"pdf_cover_mode": "video"})
+    assert res.status_code == 400
+
+
 def test_settings_update_rejects_unknown_theme(client):
     res = client.put("/api/settings", json={"theme": "inexistant"})
     assert res.status_code == 400

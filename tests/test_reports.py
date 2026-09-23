@@ -3,6 +3,7 @@ import os
 import sys
 import json
 import io
+from datetime import datetime
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -102,3 +103,86 @@ def test_service_report_handles_all_null_fields():
     pdf_bytes = generate_service_report(svc, SETTINGS)
     reader = PdfReader(io.BytesIO(pdf_bytes))
     assert len(reader.pages) == 1
+
+
+# ---------- Personnalisation page de garde / pied de page ----------
+
+def test_cover_texte_mode_hides_application_name():
+    services = load_services()[:1]
+    kpis = compute_kpis(services)
+    quality = quality_report(services)
+    settings = {**SETTINGS, "pdf_cover_mode": "texte", "pdf_custom_text": "Portefeuille de Services"}
+    pdf_bytes = generate_full_report(services, kpis, quality, settings)
+
+    reader = PdfReader(io.BytesIO(pdf_bytes))
+    cover_text = reader.pages[0].extract_text()
+    assert "MIRSAAD" not in cover_text
+    assert "Portefeuille de Services" in cover_text
+    assert "Organisation Test" in cover_text
+
+
+def test_cover_logo_mode_shows_application_name():
+    services = load_services()[:1]
+    kpis = compute_kpis(services)
+    quality = quality_report(services)
+    settings = {**SETTINGS, "pdf_cover_mode": "logo"}
+    pdf_bytes = generate_full_report(services, kpis, quality, settings)
+
+    reader = PdfReader(io.BytesIO(pdf_bytes))
+    cover_text = reader.pages[0].extract_text()
+    assert "MIRSAAD" in cover_text
+
+
+def test_footer_vide_mode_has_no_label_left():
+    services = load_services()[:1]
+    kpis = compute_kpis(services)
+    quality = quality_report(services)
+    settings = {**SETTINGS, "pdf_footer_mode": "vide"}
+    pdf_bytes = generate_full_report(services, kpis, quality, settings)
+
+    reader = PdfReader(io.BytesIO(pdf_bytes))
+    footer_text = reader.pages[0].extract_text()
+    assert "MIRSAAD" not in footer_text.split("\n")[-1]  # dernière ligne = pied de page
+
+
+def test_footer_personnalise_mode_shows_custom_text_and_org():
+    services = load_services()[:1]
+    kpis = compute_kpis(services)
+    quality = quality_report(services)
+    settings = {**SETTINGS, "pdf_footer_mode": "personnalise", "pdf_custom_text": "Portefeuille de Services"}
+    pdf_bytes = generate_full_report(services, kpis, quality, settings)
+
+    reader = PdfReader(io.BytesIO(pdf_bytes))
+    footer_text = reader.pages[0].extract_text()
+    assert "Portefeuille de Services" in footer_text
+    assert "Organisation Test" in footer_text
+
+
+def test_footer_always_shows_page_number_and_date():
+    services = load_services()[:1]
+    kpis = compute_kpis(services)
+    quality = quality_report(services)
+    for footer_mode in ("vide", "personnalise"):
+        settings = {**SETTINGS, "pdf_footer_mode": footer_mode}
+        pdf_bytes = generate_full_report(services, kpis, quality, settings)
+        reader = PdfReader(io.BytesIO(pdf_bytes))
+        footer_text = reader.pages[0].extract_text().replace("\n", " ")
+        assert "Page 1" in footer_text
+        today = datetime.now().strftime("%d/%m/%Y")
+        assert today in footer_text
+
+
+def test_cover_and_footer_custom_text_with_special_characters_do_not_break_pdf():
+    """Guillemets/antislash dans le texte personnalisé ne doivent pas casser le CSS généré."""
+    services = load_services()[:1]
+    kpis = compute_kpis(services)
+    quality = quality_report(services)
+    settings = {
+        **SETTINGS,
+        "pdf_cover_mode": "texte",
+        "pdf_footer_mode": "personnalise",
+        "pdf_custom_text": 'Portefeuille "spécial" \\ test',
+    }
+    pdf_bytes = generate_full_report(services, kpis, quality, settings)
+    reader = PdfReader(io.BytesIO(pdf_bytes))
+    assert len(reader.pages) >= 1

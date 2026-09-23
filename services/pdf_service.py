@@ -113,6 +113,7 @@ body { font-family: Arial, sans-serif; color: #101a2e; font-size: 10pt; margin: 
 .cover .app-name { font-size: 38pt; font-weight: bold; letter-spacing: 4pt; margin-bottom: 4pt; }
 .cover .app-name-ar { font-size: 17pt; color: #8fb3d6; margin-bottom: 34pt; }
 .cover .doc-title { font-size: 15pt; font-weight: bold; line-height: 1.4; margin: 0 0 20pt 0; width: 13cm; }
+.cover .doc-title-big { font-size: 26pt; font-weight: bold; line-height: 1.3; margin: 0 0 20pt 0; width: 15cm; }
 .cover .org-name { font-size: 12.5pt; color: #c3d3e8; margin: 0 0 46pt 0; width: 13cm; }
 .cover .meta-pill {
     display: inline-block; padding: 7pt 18pt; border-radius: 20pt;
@@ -188,23 +189,57 @@ table.field-table td.field-value { color: #101a2e; }
 """
 
 
-def _footer_css(app_name, org_name):
-    text = f'"{app_name} — {org_name}    Page " counter(page) " / " counter(pages)'
-    return f"@page {{ @bottom-center {{ content: {text}; font-family: Arial, sans-serif; font-size: 8pt; color: #a0a8b5; }} }}"
+def _css_str(value):
+    """Échappe une chaîne pour l'utiliser comme valeur `content: "..."` en CSS."""
+    return str(value).replace("\\", "\\\\").replace('"', '\\"')
 
 
-def _render_cover(app_name, app_name_ar, org_name, nb_services):
+def _footer_css(org_name, footer_mode="personnalise", custom_text=None):
+    """
+    Pied de page à deux zones : texte configurable à gauche (vide ou "{texte} — {organisation}"),
+    numérotation + date de génération à droite (toujours affichées).
+    """
     date_str = datetime.now().strftime("%d/%m/%Y")
-    initial = (app_name or "M")[0].upper()
+
+    if footer_mode == "vide":
+        left_content = '""'
+    else:
+        label_text = custom_text or "Portefeuille de Services"
+        left_content = f'"{_css_str(label_text)} — {_css_str(org_name)}"'
+
+    right_content = f'"Page " counter(page) " / " counter(pages) "   ·   {_css_str(date_str)}"'
+
     return f"""
-    <div class="page cover">
+@page {{
+    @bottom-left {{ content: {left_content}; font-family: Arial, sans-serif; font-size: 8pt; color: #a0a8b5; }}
+    @bottom-right {{ content: {right_content}; font-family: Arial, sans-serif; font-size: 8pt; color: #a0a8b5; }}
+}}
+"""
+
+
+def _render_cover(app_name, app_name_ar, org_name, nb_services, cover_mode="logo", custom_text=None):
+    date_str = datetime.now().strftime("%d/%m/%Y")
+
+    if cover_mode == "texte":
+        heading_text = custom_text or "Portefeuille de Services"
+        heading_html = f'<div class="doc-title-big">{_e(heading_text)}</div>'
+        footer_brand_html = ""
+    else:
+        initial = (app_name or "M")[0].upper()
+        heading_html = f"""
         <div class="mark">{_e(initial)}</div>
         <div class="app-name">{_e(app_name)}</div>
         <div class="app-name-ar">{_e(app_name_ar)}</div>
         <div class="doc-title">Portefeuille des Services SI</div>
+        """
+        footer_brand_html = f'<div class="footer-brand">{_e(app_name)} — PLATEFORME DE PILOTAGE DU PORTEFEUILLE SI</div>'
+
+    return f"""
+    <div class="page cover">
+        {heading_html}
         <div class="org-name">{_e(org_name)}</div>
         <div class="meta-pill">Généré le {date_str} · {nb_services} service{"s" if nb_services != 1 else ""}</div>
-        <div class="footer-brand">{_e(app_name)} — PLATEFORME DE PILOTAGE DU PORTEFEUILLE SI</div>
+        {footer_brand_html}
     </div>
     """
 
@@ -347,21 +382,25 @@ def generate_full_report(services, kpis, quality, settings):
     app_name = settings.get("application_name", "MIRSAAD")
     app_name_ar = settings.get("application_name_ar", "")
     org_name = settings.get("organisation_name", "Votre Organisation")
+    cover_mode = settings.get("pdf_cover_mode", "logo")
+    footer_mode = settings.get("pdf_footer_mode", "personnalise")
+    custom_text = settings.get("pdf_custom_text") or "Portefeuille de Services"
 
-    pages = [_render_cover(app_name, app_name_ar, org_name, len(services))]
+    pages = [_render_cover(app_name, app_name_ar, org_name, len(services), cover_mode=cover_mode, custom_text=custom_text)]
     pages.append(_render_synthesis(kpis, quality, org_name))
     for i, svc in enumerate(services):
         pages.append(_render_service_page(svc, last=(i == len(services) - 1)))
 
     html = f"<html><head><meta charset='utf-8'></head><body>{''.join(pages)}</body></html>"
-    css = CSS(string=BASE_CSS + _footer_css(app_name, org_name))
+    css = CSS(string=BASE_CSS + _footer_css(org_name, footer_mode=footer_mode, custom_text=custom_text))
     return HTML(string=html).write_pdf(stylesheets=[css])
 
 
 def generate_service_report(svc, settings):
-    app_name = settings.get("application_name", "MIRSAAD")
     org_name = settings.get("organisation_name", "Votre Organisation")
+    footer_mode = settings.get("pdf_footer_mode", "personnalise")
+    custom_text = settings.get("pdf_custom_text") or "Portefeuille de Services"
 
     html = f"<html><head><meta charset='utf-8'></head><body>{_render_service_page(svc, last=True)}</body></html>"
-    css = CSS(string=BASE_CSS + _footer_css(app_name, org_name))
+    css = CSS(string=BASE_CSS + _footer_css(org_name, footer_mode=footer_mode, custom_text=custom_text))
     return HTML(string=html).write_pdf(stylesheets=[css])

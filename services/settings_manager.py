@@ -10,11 +10,16 @@ ALLOWED_KEYS = {
     "application_name_ar",
     "seuil_completude_pct",
     "theme",
+    "pdf_cover_mode",
+    "pdf_footer_mode",
+    "pdf_custom_text",
 }
 
 REQUIRED_KEYS = {"organisation_name", "application_name"}
 
-ALLOWED_THEMES = {"institutionnel", "moderne"}
+ALLOWED_THEMES = {"institutionnel", "moderne", "ant"}
+ALLOWED_PDF_COVER_MODES = {"logo", "texte"}
+ALLOWED_PDF_FOOTER_MODES = {"vide", "personnalise"}
 
 
 class SettingsValidationError(Exception):
@@ -43,6 +48,12 @@ def validate_settings(payload):
 
     if "theme" in payload and payload["theme"] not in ALLOWED_THEMES:
         raise SettingsValidationError(f"Thème inconnu : « {payload['theme']} » (valeurs autorisées : {', '.join(sorted(ALLOWED_THEMES))}).")
+
+    if "pdf_cover_mode" in payload and payload["pdf_cover_mode"] not in ALLOWED_PDF_COVER_MODES:
+        raise SettingsValidationError(f"Mode de page de garde inconnu : « {payload['pdf_cover_mode']} » (valeurs autorisées : {', '.join(sorted(ALLOWED_PDF_COVER_MODES))}).")
+
+    if "pdf_footer_mode" in payload and payload["pdf_footer_mode"] not in ALLOWED_PDF_FOOTER_MODES:
+        raise SettingsValidationError(f"Mode de pied de page inconnu : « {payload['pdf_footer_mode']} » (valeurs autorisées : {', '.join(sorted(ALLOWED_PDF_FOOTER_MODES))}).")
 
     return True
 

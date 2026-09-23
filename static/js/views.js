@@ -445,6 +445,7 @@ Views.settings = async function () {
                     <div class="theme-picker" id="theme-picker">
                         ${themeCard("institutionnel", "Institutionnel", "preview-institutionnel")}
                         ${themeCard("moderne", "Moderne", "preview-moderne")}
+                        ${themeCard("ant", "Ant Design", "preview-ant")}
                     </div>
                     <input type="hidden" id="theme-value" value="${Render.escape(currentTheme)}">
                 </div>
@@ -477,6 +478,35 @@ Views.settings = async function () {
                 </div>
             </form>
 
+            <form class="panel" id="settings-form-3">
+                <div class="panel-header">Rapports PDF</div>
+                <div class="panel-body settings-grid">
+                    <label>Page de garde
+                        <select name="pdf_cover_mode">
+                            <option value="logo" ${settings.pdf_cover_mode === "logo" ? "selected" : ""}>Logo et nom MIRSAAD</option>
+                            <option value="texte" ${settings.pdf_cover_mode === "texte" ? "selected" : ""}>Texte personnalisé (sans logo)</option>
+                        </select>
+                    </label>
+                    <label>Pied de page
+                        <select name="pdf_footer_mode">
+                            <option value="personnalise" ${settings.pdf_footer_mode === "personnalise" ? "selected" : ""}>Texte personnalisé</option>
+                            <option value="vide" ${settings.pdf_footer_mode === "vide" ? "selected" : ""}>Vide</option>
+                        </select>
+                    </label>
+                    <label class="form-field-wide" style="grid-column:1/-1;">Texte personnalisé
+                        <input type="text" name="pdf_custom_text" value="${Render.escape(settings.pdf_custom_text)}" placeholder="Portefeuille de Services">
+                    </label>
+                </div>
+                <div class="panel-body" style="padding-top:0;">
+                    <p style="font-size:12px;color:var(--slate-600);margin:0;">
+                        Ce texte remplace « MIRSAAD » sur la page de garde (si « Texte personnalisé » est choisi
+                        ci-dessus) et apparaît en bas de chaque page avec le nom de l'organisation (si « Texte
+                        personnalisé » est choisi pour le pied de page). La numérotation des pages et la date de
+                        génération restent toujours affichées, quel que soit le choix.
+                    </p>
+                </div>
+            </form>
+
             <div id="settings-feedback"></div>
             <button type="button" id="settings-save" class="btn btn-primary">Enregistrer les paramètres</button>
         `);
@@ -496,7 +526,8 @@ Views.settings = async function () {
             const feedback = document.getElementById("settings-feedback");
             const data1 = new FormData(document.getElementById("settings-form"));
             const data2 = new FormData(document.getElementById("settings-form-2"));
-            const payload = Object.fromEntries([...data1.entries(), ...data2.entries()]);
+            const data3 = new FormData(document.getElementById("settings-form-3"));
+            const payload = Object.fromEntries([...data1.entries(), ...data2.entries(), ...data3.entries()]);
             payload.seuil_completude_pct = parseInt(payload.seuil_completude_pct, 10);
             payload.theme = document.getElementById("theme-value").value;
 

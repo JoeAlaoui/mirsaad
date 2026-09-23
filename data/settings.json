@@ -4,5 +4,8 @@
   "application_name": "MIRSAAD",
   "application_name_ar": "مرصاد",
   "seuil_completude_pct": 70,
-  "theme": "institutionnel"
+  "theme": "ant",
+  "pdf_cover_mode": "texte",
+  "pdf_footer_mode": "personnalise",
+  "pdf_custom_text": "Portefeuille de Services"
 }

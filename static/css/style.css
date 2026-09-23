@@ -682,6 +682,13 @@ body[data-theme="moderne"] .completude-fill { background: linear-gradient(90deg,
 .theme-preview.preview-moderne .theme-preview-chip:nth-child(2) { background: #e8e0fe; width: 90%; }
 .theme-preview.preview-moderne .theme-preview-chip:nth-child(3) { background: #dcf6e2; width: 70%; }
 
+/* Aperçu thème "Ant Design" */
+.theme-preview.preview-ant { background: #f5f5f5; }
+.theme-preview.preview-ant .theme-preview-sidebar { background: #ffffff; }
+.theme-preview.preview-ant .theme-preview-chip:nth-child(1) { background: #1677ff; width: 50%; }
+.theme-preview.preview-ant .theme-preview-chip:nth-child(2) { background: #e6f4ff; width: 90%; }
+.theme-preview.preview-ant .theme-preview-chip:nth-child(3) { background: #f0f0f0; width: 75%; }
+
 /* --- Sidebar responsive : redevient une barre horizontale en dessous de 900px --- */
 @media (max-width: 900px) {
     body[data-theme="moderne"] .topbar {
@@ -697,3 +704,105 @@ body[data-theme="moderne"] .completude-fill { background: linear-gradient(90deg,
     body[data-theme="moderne"] .content,
     body[data-theme="moderne"] .footer { margin-left: 0; }
 }
+
+/* ============================================================
+   THÈME "ANT DESIGN" — activé via body[data-theme="ant"]
+   Inspiré du design system Ant Design (Ant Design 5, tokens par défaut) :
+   bleu #1677ff, coins à 6px, ombres très subtiles, fond gris clair #f5f5f5.
+   ============================================================ */
+body[data-theme="ant"] {
+    background: #f5f5f5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+/* --- Barre horizontale claire --- */
+body[data-theme="ant"] .topbar {
+    background: #ffffff;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    position: sticky;
+}
+
+body[data-theme="ant"] .brand-mark {
+    background: #1677ff;
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+body[data-theme="ant"] .brand-name { color: rgba(0, 0, 0, 0.88); }
+body[data-theme="ant"] .brand-name-ar { color: rgba(0, 0, 0, 0.45); }
+
+body[data-theme="ant"] .topbar-nav a {
+    color: rgba(0, 0, 0, 0.65);
+    font-weight: 500;
+    border-radius: 6px;
+}
+
+body[data-theme="ant"] .topbar-nav a:hover { background: #f5f5f5; color: rgba(0, 0, 0, 0.88); }
+body[data-theme="ant"] .topbar-nav a.active { background: #e6f4ff; color: #1677ff; }
+body[data-theme="ant"] .nav-icon { opacity: 0.7; }
+
+/* --- Coins à 6px, ombres très subtiles --- */
+body[data-theme="ant"] .panel,
+body[data-theme="ant"] .kpi-card,
+body[data-theme="ant"] .skeleton-panel,
+body[data-theme="ant"] .skeleton-card {
+    border-radius: 6px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 1px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+body[data-theme="ant"] .panel { border-color: #f0f0f0; }
+body[data-theme="ant"] .panel-header {
+    border-radius: 6px 6px 0 0;
+    border-color: #f0f0f0;
+    color: rgba(0, 0, 0, 0.88);
+}
+
+body[data-theme="ant"] .kpi-card { border-color: #f0f0f0; border-left-color: #1677ff; }
+body[data-theme="ant"] .kpi-card.accent-crit { border-left-color: #ff4d4f; }
+body[data-theme="ant"] .kpi-card.accent-ok { border-left-color: #52c41a; }
+body[data-theme="ant"] .kpi-card.accent-warn { border-left-color: #faad14; }
+body[data-theme="ant"] .kpi-value { color: rgba(0, 0, 0, 0.88); }
+body[data-theme="ant"] .kpi-label { color: rgba(0, 0, 0, 0.45); }
+
+/* --- Boutons --- */
+body[data-theme="ant"] .btn { border-radius: 6px; border-color: #d9d9d9; color: rgba(0, 0, 0, 0.88); }
+body[data-theme="ant"] .btn:hover { border-color: #4096ff; color: #1677ff; transform: none; }
+body[data-theme="ant"] .btn-primary { background: #1677ff; border-color: #1677ff; color: #fff; }
+body[data-theme="ant"] .btn-primary:hover { background: #4096ff; border-color: #4096ff; box-shadow: none; }
+body[data-theme="ant"] .btn-danger { border-color: #ff4d4f; color: #ff4d4f; }
+
+/* --- Formulaires --- */
+body[data-theme="ant"] .filter-bar input,
+body[data-theme="ant"] .filter-bar select,
+body[data-theme="ant"] .form-field input,
+body[data-theme="ant"] .form-field select,
+body[data-theme="ant"] .form-field textarea,
+body[data-theme="ant"] .settings-grid input {
+    border-radius: 6px;
+    border-color: #d9d9d9;
+}
+
+body[data-theme="ant"] .filter-bar input:focus,
+body[data-theme="ant"] .form-field input:focus,
+body[data-theme="ant"] .form-field select:focus,
+body[data-theme="ant"] .form-field textarea:focus,
+body[data-theme="ant"] .settings-grid input:focus {
+    border-color: #1677ff;
+    box-shadow: 0 0 0 2px rgba(22, 119, 255, 0.15);
+}
+
+/* --- Tableaux --- */
+body[data-theme="ant"] table.data-table th {
+    background: #fafafa;
+    color: rgba(0, 0, 0, 0.45);
+    text-transform: none;
+    font-weight: 600;
+    border-color: #f0f0f0;
+}
+body[data-theme="ant"] table.data-table td { border-color: #f0f0f0; }
+body[data-theme="ant"] table.data-table tr:hover td { background: #e6f4ff; }
+body[data-theme="ant"] table.data-table a { color: #1677ff; }
+body[data-theme="ant"] .completude-fill { background: #1677ff; }
+
+/* --- Animations plus sobres (Ant Design reste discret) --- */
+body[data-theme="ant"] .kpi-card:hover { transform: none; box-shadow: 0 1px 2px rgba(0,0,0,0.03), 0 1px 6px -1px rgba(0,0,0,0.02), 0 2px 4px rgba(0,0,0,0.02); }
